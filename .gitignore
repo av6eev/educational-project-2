@@ -1,0 +1,10 @@
+
+GOTA/Library/
+
+GOTA/Logs/
+
+GOTA/UserSettings/
+
+*.sln
+
+*.csproj
