@@ -9,11 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 0}
+  m_Script: {fileID: 11500000, guid: a287be6c49135cd4f9b2b8666c39d999, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Unity.Rider.Editor:Packages.Rider.Editor:RiderScriptEditorPersistedState
-<<<<<<< HEAD
-  lastWriteTicks: -8585495004047499421
-=======
-  lastWriteTicks: -8585495005600050416
->>>>>>> develop
+  m_EditorClassIdentifier: 
+  assetDefaultFramerate: 60
+  m_DefaultFrameRate: 60
