@@ -26,12 +26,12 @@ public class StartController : MonoBehaviour
 
     void Update()
     {
+        _statesEngine.CurrentState.HandleInput();
         _statesEngine.CurrentState.DoLogic();
     }
 
     private void FixedUpdate()
     {
-        _statesEngine.CurrentState.HandleInput();
         _statesEngine.CurrentState.DoPhysics(Time.deltaTime);
     }
 }

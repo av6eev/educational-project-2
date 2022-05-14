@@ -22,10 +22,12 @@ namespace Player.States
 
         public override void Disable()
         {
+            _model.Jump(false);
         }
 
         public override void Enable()
         {
+            _model.Jump(true);
             Debug.Log("Jump state");
 
             _model.IsGrounded = false;
@@ -34,16 +36,11 @@ namespace Player.States
             Jump();
         }
 
-        public override void HandleInput()
-        {
-            _input = _moveAction.ReadValue<Vector2>();
-        }
-
         public override void DoLogic()
         {
             if (_model.IsGrounded)
             {
-                StatesEngine.Change(StatesEngine.Get(StatesType.Idle));
+                StatesEngine.Change(StatesEngine.Get(StatesType.Land));
             }
         }
 
@@ -55,16 +52,16 @@ namespace Player.States
                 var view = _context.GlobalContainer.PlayerView;
                 var transformRight = view.CameraTransform.right;
                 var transformForward = view.CameraTransform.forward;
-                
+
                 _velocity = _playerVelocity;
-                _velocity = _velocity.x * transformRight.normalized + _velocity.z * transformForward.normalized;
                 _velocity.y = 0f;
+                _velocity = _velocity.x * transformRight.normalized + _velocity.z * transformForward.normalized;
 
                 airVelocity = airVelocity.x * transformRight.normalized + airVelocity.z * transformForward.normalized;
                 airVelocity.y = 0f;
 
                 view.CharacterController.Move(_gravityVelocity * deltaTime + (airVelocity * _data.AirControl + _velocity * (1 - _data.AirControl)) * _playerSpeed * deltaTime);
-                
+
                 _gravityVelocity.y += _data.Gravity * deltaTime;
                 _model.IsGrounded = view.CharacterController.isGrounded;
             }

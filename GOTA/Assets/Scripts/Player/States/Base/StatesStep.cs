@@ -1,6 +1,4 @@
-﻿using System;
-using UnityEngine;
-using Utilities;
+﻿using Utilities;
 
 namespace Player.States.Base
 {
@@ -15,11 +13,13 @@ namespace Player.States.Base
             _statesEngine = _context.StatesEngine;
 
             var idleState = new IdleState(_context, _statesEngine);
-            var jumpState = new JumpState(_context, _statesEngine);
-
             _statesEngine.Init(idleState);
+            
             _statesEngine.Add(idleState);
-            _statesEngine.Add(jumpState);
+            _statesEngine.Add(new JumpState(_context, _statesEngine));
+            _statesEngine.Add(new LandState(_context, _statesEngine));
+            _statesEngine.Add(new SprintState(_context, _statesEngine));
+            _statesEngine.Add(new WalkState(_context, _statesEngine));
         }
     }
 }

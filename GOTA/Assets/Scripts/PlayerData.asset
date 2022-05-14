@@ -17,11 +17,10 @@ MonoBehaviour:
   SprintSpeed: 7
   RotationSpeed: 5
   CrouchColliderHeight: 1.5
-  JumpHeight: 2
+  JumpHeight: 1.5
   Gravity: -9.8
   GravityMultiplier: 2
-  XSensitivity: 30
-  YSensitivity: 30
+  SpeedDampTime: 0.31
   VelocityDampTime: 0.1
   RotationDampTime: 0.1
   AirControl: 0.5

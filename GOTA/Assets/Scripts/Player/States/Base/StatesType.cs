@@ -3,10 +3,11 @@
     public enum StatesType
     {
         Idle,
-        Move,
+        Walk,
+        Sprint,
         Jump,
         Land,
         Crouch,
-        None
+        None,
     }
 }
