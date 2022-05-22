@@ -4,10 +4,5 @@
     {
         Idle,
         Walk,
-        Sprint,
-        Jump,
-        Land,
-        Crouch,
-        None,
-    }
+ы    }
 }

@@ -1,4 +1,5 @@
 ﻿using Player;
+using Player.Systems;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -8,5 +9,6 @@ namespace Utilities
     {
         public PlayerInput PlayerInput;
         public PlayerView PlayerView;
+        public CameraView CameraView;
     }
 }

@@ -24,18 +24,9 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Jump",
+                    "name": "CameraRotate",
                     "type": "Button",
-                    "id": "b5a93c69-f2ba-4c28-aca0-aa643cee4d16",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
-                    "name": "Sprint",
-                    "type": "Button",
-                    "id": "2162556f-d455-4b6c-a15e-be93f4d9088b",
+                    "id": "c1dbed50-6256-4a25-8062-1f45e7145985",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -166,23 +157,12 @@
                 },
                 {
                     "name": "",
-                    "id": "7f50bac7-cb54-4fdf-873b-d899b6a8251f",
-                    "path": "<Keyboard>/space",
+                    "id": "eb7cea90-4f58-46cc-b873-39df294823e0",
+                    "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Jump",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "e5a9099a-a0a5-4537-92c9-e272d81ea359",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "Sprint",
+                    "action": "CameraRotate",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

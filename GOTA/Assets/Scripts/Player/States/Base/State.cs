@@ -1,5 +1,4 @@
 ﻿using InputManager;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
@@ -16,13 +15,10 @@ namespace Player.States.Base
         protected Vector3 _currentVelocity;
         protected Vector3 _gravityVelocity;
         protected Vector2 _input;
-        protected Vector3 _playerVelocity;
-        private Vector3 _cVelocity;
         protected float _playerSpeed;
 
         protected InputAction _moveAction;
-        protected InputAction _jumpAction;
-        protected InputAction _sprintAction;
+        protected InputAction _cameraRotateAction;
 
         public StatesType Type;
 
@@ -30,11 +26,11 @@ namespace Player.States.Base
         {
             _context = context;
             StatesEngine = statesEngine;
+            
             _model = _context.PlayerModel;
-
+            
             _moveAction = _context.InputModel.InputActions[InputActions.Movement];
-            _jumpAction = _context.InputModel.InputActions[InputActions.Jump];
-            _sprintAction = _context.InputModel.InputActions[InputActions.Sprint];
+            _cameraRotateAction = _context.InputModel.InputActions[InputActions.CameraRotate];
         }
 
         public abstract void Disable();
@@ -47,42 +43,20 @@ namespace Player.States.Base
 
             _moveAction.performed += ctx => _model.IsWalk = true; 
             _moveAction.canceled += ctx => _model.IsWalk = false;
-            _jumpAction.performed += ctx => _model.IsJump = ctx.ReadValueAsButton();
-            _model.IsSprint = _sprintAction.IsPressed();
+
+            _model.IsRotationButtonEnable = _cameraRotateAction.IsPressed();
             
             _input = _moveAction.ReadValue<Vector2>();
+            
             _velocity = new Vector3(_input.x, 0, _input.y);
             _context.PlayerModel.SetPosition(_velocity);
+            
             _velocity = _velocity.x * cameraTransform.right.normalized + _velocity.z * cameraTransform.forward.normalized;
             _velocity.y = 0f;
         }
 
         public abstract void DoLogic();
 
-        public virtual void DoPhysics(float deltaTime)
-        {
-            var view = _context.GlobalContainer.PlayerView;
-            var controller = view.CharacterController;
-            var targetRotation = Quaternion.Euler(0, view.CameraTransform.eulerAngles.y, 0);
-
-            view.CameraTransform = Camera.main.transform;
-
-            _gravityVelocity.y = _context.PlayerData.Gravity * deltaTime;
-
-            _context.PlayerModel.IsGrounded = controller.isGrounded;
-
-            if (_context.PlayerModel.IsGrounded && _gravityVelocity.y < 0)
-            {
-                _gravityVelocity.y = 0f;
-            }
-
-            _currentVelocity = Vector3.SmoothDamp(_currentVelocity, _velocity, ref _cVelocity, _context.PlayerData.VelocityDampTime);
-            controller.Move(_currentVelocity * deltaTime * _playerSpeed);
-
-            if (_velocity.sqrMagnitude > 0)
-            {
-                view.transform.rotation = Quaternion.Lerp(view.transform.rotation, targetRotation, _context.PlayerData.RotationSpeed * deltaTime);
-            }
-        }
+        public abstract void DoPhysics(float deltaTime);
     }
 }

@@ -16,9 +16,6 @@ namespace Player.States.Base
             _statesEngine.Init(idleState);
             
             _statesEngine.Add(idleState);
-            _statesEngine.Add(new JumpState(_context, _statesEngine));
-            _statesEngine.Add(new LandState(_context, _statesEngine));
-            _statesEngine.Add(new SprintState(_context, _statesEngine));
             _statesEngine.Add(new WalkState(_context, _statesEngine));
         }
     }

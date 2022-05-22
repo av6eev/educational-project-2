@@ -30,8 +30,6 @@ namespace Player.States
             Debug.Log("Idle state");
             _model.Idle(0);
 
-            _model.IsJump = false;
-            _model.IsSprint = false;
             _model.IsWalk = false;
             
             _input = Vector2.zero;
@@ -52,11 +50,6 @@ namespace Player.States
 
         public override void DoLogic()
         {
-            if (_model.IsJump)
-            {
-                StatesEngine.Change(StatesEngine.Get(StatesType.Jump));
-            }
-
             if (_model.IsWalk)
             {
                 StatesEngine.Change(StatesEngine.Get(StatesType.Walk));

@@ -3,7 +3,6 @@
     public static class InputActions
     {
         public const string Movement = "Movement";
-        public const string Jump = "Jump";
-        public const string Sprint = "Sprint";
+        public const string CameraRotate = "CameraRotate";
     }
 }
