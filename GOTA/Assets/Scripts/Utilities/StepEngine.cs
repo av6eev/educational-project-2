@@ -1,7 +1,6 @@
 ﻿using System.Collections.Generic;
 using InputManager;
 using Player;
-using Player.States.Base;
 
 namespace Utilities
 {
@@ -13,7 +12,7 @@ namespace Utilities
         {
             Add(new InputStep());
             Add(new PlayerStep());
-            Add(new StatesStep());
+            // Add(new StatesStep());
         }
         
         public void Execute(GameContext context, ControllerEngine engine, GlobalContainer container)

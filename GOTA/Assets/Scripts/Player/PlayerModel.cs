@@ -7,7 +7,10 @@ namespace Player
     {
         public event Action<bool> OnWalk;
         public event Action<float> OnIdle;
+        public event Action OnToggle;
 
+        public bool IsButtonToggled;
+        
         public bool IsWalk;
         public bool IsGrounded;
         public bool IsRotationButtonEnable;
@@ -19,6 +22,12 @@ namespace Player
             Position = newPosition;
         }
 
+        public void ButtonToggled()
+        {
+            IsButtonToggled = !IsButtonToggled;
+            OnToggle?.Invoke();
+        }
+        
         public void Walk(bool isEnable)
         {
             OnWalk?.Invoke(isEnable);
