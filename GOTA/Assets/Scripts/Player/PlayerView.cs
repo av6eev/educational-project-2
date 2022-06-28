@@ -6,15 +6,24 @@ namespace Player
     {
         public CharacterController CharacterController;
         public Transform CameraTransform;
+        public Animator Animator;
         
-        public void Move()
+        private static readonly int Speed = Animator.StringToHash("Speed");
+        private static readonly int IsWalk = Animator.StringToHash("IsWalk");
+
+        public void SetAnimationSpeed(float inputMagnitude, float speedDampTime, float deltaTime)
         {
-            //TODO: animate
+            Animator.SetFloat(Speed, inputMagnitude, speedDampTime, deltaTime);
         }
 
-        public void Jump()
+        public void Walk(bool isEnable)
         {
-            //TODO: animate
+            Animator.SetBool(IsWalk, isEnable);
+        }
+
+        public void Idle(float speed)
+        {
+            Animator.SetFloat(Speed, speed);
         }
     }
 }

@@ -5,20 +5,28 @@ namespace Player
 {
     public class PlayerModel
     {
-        public event Action OnMove;
+        public event Action<bool> OnWalk;
+        public event Action<float> OnIdle;
 
-        public bool IsJump;
-        public bool IsCrouch;
+        public bool IsWalk;
         public bool IsGrounded;
-        public bool IsSprint;
+        public bool IsRotationButtonEnable;
         
         public Vector3 Position { get; private set; }
-        public Vector3 Velocity;
 
         public void SetPosition(Vector3 newPosition)
         {
             Position = newPosition;
-            OnMove?.Invoke();
+        }
+
+        public void Walk(bool isEnable)
+        {
+            OnWalk?.Invoke(isEnable);
+        }
+
+        public void Idle(float speed)
+        {
+            OnIdle?.Invoke(speed);
         }
     }
 }

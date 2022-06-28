@@ -14,20 +14,27 @@ namespace Player
             _model = model;
             _view = view;
         }
-        
+
         public void Deactivate()
         {
-            _model.OnMove -= Move;
-        }
-        
-        public void Activate()
-        {
-            _model.OnMove += Move;
+            _model.OnWalk -= Walk;
+            _model.OnIdle -= Idle;
         }
 
-        private void Move()
+        public void Activate()
         {
-            _view.Move();
+            _model.OnWalk += Walk;
+            _model.OnIdle += Idle;
+        }
+
+        private void Idle(float speed)
+        {
+            _view.Idle(speed);
+        }
+
+        private void Walk(bool isEnable)
+        {
+            _view.Walk(isEnable);
         }
     }
 }

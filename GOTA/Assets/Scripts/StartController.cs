@@ -1,5 +1,6 @@
 using Player;
 using Player.States.Base;
+using Player.Systems;
 using UnityEngine;
 using Utilities;
 
@@ -20,18 +21,22 @@ public class StartController : MonoBehaviour
         _context.PlayerData = _playerData;
         _context.StatesEngine = _statesEngine;
 
+        _systemEngine.Add(new CameraRotationSystem(_context));
+        
         _stepEngine.Execute(_context, _controllerEngine, _context.GlobalContainer);
         _controllerEngine.Activate();
     }
 
     void Update()
     {
-        _statesEngine.CurrentState.DoLogic();
+        _statesEngine.CurrentState.HandleInput();
     }
 
     private void FixedUpdate()
     {
-        _statesEngine.CurrentState.HandleInput();
+        _systemEngine.Update(Time.deltaTime);
+        
+        _statesEngine.CurrentState.DoLogic();
         _statesEngine.CurrentState.DoPhysics(Time.deltaTime);
     }
 }

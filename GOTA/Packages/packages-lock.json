@@ -73,6 +73,7 @@
       "dependencies": {},
       "url": "https://packages.unity.com"
     },
+<<<<<<< HEAD
     "com.unity.probuilder": {
       "version": "5.0.4",
       "depth": 0,
@@ -90,6 +91,21 @@
       "source": "registry",
       "dependencies": {
         "com.unity.settings-manager": "1.0.2"
+=======
+    "com.unity.postprocessing": {
+      "version": "2.2.2",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {},
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.recorder": {
+      "version": "2.0.3-preview.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.timeline": "1.0.0"
+>>>>>>> develop
       },
       "url": "https://packages.unity.com"
     },

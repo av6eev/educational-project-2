@@ -2,6 +2,7 @@
 using Player;
 using Player.States;
 using Player.States.Base;
+using Player.Systems;
 
 namespace Utilities
 {
@@ -14,5 +15,6 @@ namespace Utilities
         public InputModel InputModel { get; set; }
         public PlayerModel PlayerModel { get; set; }
         public PlayerData PlayerData { get; set; }
+        public CameraView CameraView { get; set; }
     }
 }
