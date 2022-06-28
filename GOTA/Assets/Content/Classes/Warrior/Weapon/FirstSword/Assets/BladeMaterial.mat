@@ -54,6 +54,6 @@ Material:
     - _QueueOffset: 0
     - _Step: 0
     m_Colors:
-    - _BladeColor: {r: 3.890196, g: 1.5058824, b: 11.984314, a: 1}
+    - _BladeColor: {r: 8.234462, g: 0.40399304, b: 17.129307, a: 1}
     - _Color: {r: 1.866066, g: 1.866066, b: 1.866066, a: 0.25}
   m_BuildTextureStacks: []
