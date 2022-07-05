@@ -347,7 +347,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7777778, y: 1}
+    m_SensorSize: {x: 2.0187395, y: 1}
   m_Transitions:
     m_BlendHint: 0
     m_InheritPosition: 0
@@ -385,6 +385,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PlayerIndex: -1
+  AutoEnableInputs: 1
   XYAxis: {fileID: -9062001971858102776, guid: f93516430d919924cad04a0206278956, type: 3}
   ZAxis: {fileID: -6370969898645589087, guid: f93516430d919924cad04a0206278956, type: 3}
 --- !u!114 &1092213066
@@ -998,6 +999,7 @@ MonoBehaviour:
   _container: {fileID: 1352829200}
   _playerData: {fileID: 11400000, guid: b2cc3f13f1766f640ab24fe9b0a8cff9, type: 2}
   _cameraData: {fileID: 11400000, guid: b09fb3cd8278bcc4f8ed94e10f0dac7d, type: 2}
+  _playerSO: {fileID: 11400000, guid: a2ff8cd5592cc9a4aa326d0bf46fc89f, type: 2}
 --- !u!1001 &1355654205824536540
 PrefabInstance:
   m_ObjectHideFlags: 0

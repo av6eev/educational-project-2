@@ -5,7 +5,7 @@ namespace Player.StateMachine.Movement.States
 {
     public class IdlingState : MovementState
     {
-        public IdlingState(MovementStateMachine movementStateMachine, GameContext context) : base(movementStateMachine, context)
+        public IdlingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
         }
 
@@ -13,7 +13,7 @@ namespace Player.StateMachine.Movement.States
         {
             base.Enter();
             
-            Context.PlayerData.SpeedModifier = 0f;
+            StateMachine.ReusableData.MovementSpeedModifier = 0f;
             ResetVelocity();
         }
 
@@ -23,19 +23,23 @@ namespace Player.StateMachine.Movement.States
             
             OnMove();
         }
-
+        
         private void OnMove()
         {
-            if (Context.PlayerModel.IsButtonToggled)
+            if (StateMachine.ReusableData.IsButtonToggled)
             {
-                MovementStateMachine.ChangeState(MovementStateMachine.WalkingState);
-                Debug.Log($"{Context.PlayerModel.IsButtonToggled}; walking state");
-                return;
+                if (StateMachine.ReusableData.MovementInput != Vector2.zero)
+                {
+                    StateMachine.ChangeState(StateMachine.WalkingState);
+                    Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}; walking state");
+                    return;
+                }
             }
-            
-            // MovementStateMachine.ChangeState(); //skill cast system            
-            
-            Debug.Log($"{Context.PlayerModel.IsButtonToggled}; skill cast system");
+            else
+            {
+                // StateMachine.ChangeState(); //skill cast system            
+                Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}; skill cast system");
+            }
         }
     }
 }

@@ -1,3 +1,4 @@
+using Player.Data.ScriptableObjects;
 using Player.StateMachine;
 using Player.StateMachine.Utilities;
 using ScriptableObjects;
@@ -7,8 +8,8 @@ using Utilities;
 public class StartController : MonoBehaviour
 {
     [SerializeField] private GlobalContainer _container;
-    [SerializeField] private PlayerData _playerData;
     [SerializeField] private CameraData _cameraData;
+    [SerializeField] private PlayerSO _playerSO;
     private readonly GameContext _context = new GameContext();
 
     private readonly ControllerEngine _controllerEngine = new ControllerEngine();
@@ -19,8 +20,8 @@ public class StartController : MonoBehaviour
     void Start()
     {
         _context.GlobalContainer = _container;
-        _context.PlayerData = _playerData;
         _context.CameraData = _cameraData;
+        _context.PlayerSO = _playerSO;
         
         _stepEngine.Execute(_context, _controllerEngine, _context.GlobalContainer);
         _controllerEngine.Activate();

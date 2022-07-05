@@ -1,6 +1,6 @@
-﻿using CameraManager;
-using InputManager;
+﻿using InputManager;
 using Player;
+using Player.Data.ScriptableObjects;
 using Player.StateMachine;
 using ScriptableObjects;
 
@@ -13,8 +13,8 @@ namespace Utilities
         public InputModel InputModel { get; set; }
         public PlayerModel PlayerModel { get; set; }
         
-        public PlayerData PlayerData { get; set; }
         public CameraData CameraData { get; set; }
+        public PlayerSO PlayerSO { get; set; }
 
         public StateMachineEngine StateMachineEngine { get; set; }
     }

@@ -1,11 +1,10 @@
-﻿using UnityEngine;
-using Utilities;
+﻿using Utilities;
 
 namespace Player.StateMachine.Movement.States
 {
     public class RunningState : MovementState
     {
-        public RunningState(MovementStateMachine movementStateMachine, GameContext context) : base(movementStateMachine, context)
+        public RunningState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
         }
 
@@ -13,24 +12,23 @@ namespace Player.StateMachine.Movement.States
         {
             base.Enter();
 
-            Context.PlayerData.SpeedModifier = 1f;
+            StateMachine.ReusableData.MovementSpeedModifier = GroundedData.RunData.SpeedModifier;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
 
-            switch (Context.PlayerModel.IsButtonToggled)
+            switch (StateMachine.ReusableData.IsButtonToggled)
             {
                 case false when !Context.PlayerModel.IsRunEnable:
-                    MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
+                    StateMachine.ChangeState(StateMachine.IdlingState);
                     break;
                 case true when !Context.PlayerModel.IsRunEnable:
-                    MovementStateMachine.ChangeState(MovementStateMachine.WalkingState);
+                    StateMachine.ChangeState(StateMachine.WalkingState);
                     break;
                 case false:
-                    MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
-                    Debug.Log("test");
+                    StateMachine.ChangeState(StateMachine.IdlingState);
                     break;
                 default: return;
             }

@@ -10,7 +10,6 @@ namespace Player
         public event Action OnToggle;
         public event Action OnRun;
 
-        public bool IsButtonToggled;
         public bool IsRunEnable;
         
         public Vector3 Position { get; private set; }
@@ -22,14 +21,12 @@ namespace Player
 
         public void ButtonToggled()
         {
-            IsButtonToggled = !IsButtonToggled;
             OnToggle?.Invoke();
         }
 
         public void RunEnabled()
         {
             IsRunEnable = !IsRunEnable;
-            Debug.Log(IsRunEnable);
             OnRun?.Invoke();
         }
         

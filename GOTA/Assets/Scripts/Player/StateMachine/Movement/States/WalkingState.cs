@@ -4,7 +4,7 @@ namespace Player.StateMachine.Movement.States
 {
     public class WalkingState : MovementState
     {
-        public WalkingState(MovementStateMachine movementStateMachine, GameContext context) : base(movementStateMachine, context)
+        public WalkingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
         }
 
@@ -12,21 +12,22 @@ namespace Player.StateMachine.Movement.States
         {
             base.Enter();
 
-            Context.PlayerData.SpeedModifier = 0.5f;
+            StateMachine.ReusableData.MovementSpeedModifier = GroundedData.WalkData.SpeedModifier;
         }
 
         public override void LogicUpdate()
         {
             base.LogicUpdate();
 
-            switch (Context.PlayerModel.IsButtonToggled)
+            switch (StateMachine.ReusableData.IsButtonToggled)
             {
                 case false:
-                    MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
+                    StateMachine.ChangeState(StateMachine.IdlingState);
                     break;
                 case true when Context.PlayerModel.IsRunEnable:
-                    MovementStateMachine.ChangeState(MovementStateMachine.RunningState);
+                    StateMachine.ChangeState(StateMachine.RunningState);
                     break;
+                default: return;
             }
         }
     }

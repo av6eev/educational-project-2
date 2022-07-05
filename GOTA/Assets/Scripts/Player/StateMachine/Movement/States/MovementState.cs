@@ -1,8 +1,10 @@
 ﻿using InputManager;
+using Player.Data.States;
 using Player.StateMachine.Utilities;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using Utilities;
+using IState = Player.StateMachine.Utilities.IState;
 
 namespace Player.StateMachine.Movement.States
 {
@@ -12,25 +14,28 @@ namespace Player.StateMachine.Movement.States
         protected readonly GameContext Context;
         protected readonly PlayerView View;
 
-        protected Vector2 MovementInput;
         protected InputAction ToggleButton;
         protected InputAction RunButton;
-        protected MovementStateMachine MovementStateMachine;
+        
+        protected readonly MovementStateMachine StateMachine;
 
-        private Vector3 _currentTargetRotation;
-        private Vector3 _timeToReachTargetRotation;
-        private Vector3 _dampedCurrentVelocity;
-        private Vector3 _dampedPassedTime;
+        protected readonly GroundedData GroundedData;
 
-        public MovementState(MovementStateMachine movementStateMachine, GameContext context)
+        public MovementState(MovementStateMachine stateMachine, GameContext context)
         {
-            MovementStateMachine = movementStateMachine;
-
+            StateMachine = stateMachine;
             Context = context;
+            
+            GroundedData = Context.PlayerSO.GroundedData;
             Rigidbody = Context.GlobalContainer.PlayerView.Rigidbody;
             View = Context.GlobalContainer.PlayerView;
 
-            _timeToReachTargetRotation.y = 0.14f;
+            Initialize();
+        }
+
+        private void Initialize()
+        {
+            StateMachine.ReusableData.TimeToReachTargetRotation = GroundedData.RotationData.TargetRotationReachTime;
         }
 
         public virtual void Enter()
@@ -47,7 +52,7 @@ namespace Player.StateMachine.Movement.States
 
         public virtual void HandleInput()
         {
-            MovementInput = Context.InputModel.InputActions[InputActionsConstants.Movement].ReadValue<Vector2>();
+            StateMachine.ReusableData.MovementInput = Context.InputModel.InputActions[InputActionsConstants.Movement].ReadValue<Vector2>();
         }
 
         private void AddInputCallbacks()
@@ -74,16 +79,17 @@ namespace Player.StateMachine.Movement.States
 
         private void OnToggle(InputAction.CallbackContext ctx)
         {
+            StateMachine.ReusableData.IsButtonToggled = !StateMachine.ReusableData.IsButtonToggled;
             Context.PlayerModel.ButtonToggled();
         }
 
         public virtual void LogicUpdate()
         {
-            if (MovementInput == Vector2.zero || Context.PlayerData.SpeedModifier == 0f)
+            if (StateMachine.ReusableData.MovementInput == Vector2.zero || StateMachine.ReusableData.MovementSpeedModifier == 0f)
             {
-                if (!Context.StateMachineEngine.GetStateMachine(StateMachineType.Movement).GetCurrentState().Equals(MovementStateMachine.IdlingState))
+                if (!Context.StateMachineEngine.GetStateMachine(StateMachineType.Movement).GetCurrentState().Equals(StateMachine.IdlingState))
                 {
-                    MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
+                    StateMachine.ChangeState(StateMachine.IdlingState);
                 }
             }
         }
@@ -95,20 +101,19 @@ namespace Player.StateMachine.Movement.States
 
         private void Move()
         {
-            if (MovementInput == Vector2.zero || Context.PlayerData.SpeedModifier == 0f)
+            if (StateMachine.ReusableData.MovementInput == Vector2.zero || StateMachine.ReusableData.MovementSpeedModifier == 0f)
             {
                 Rigidbody.velocity = Vector3.zero;
                 return;
             }
 
-            var movementDirection = new Vector3(MovementInput.x, 0, MovementInput.y);
+            var movementDirection = new Vector3(StateMachine.ReusableData.MovementInput.x, 0, StateMachine.ReusableData.MovementInput.y);
             var targetRotationYAngle = Rotate(movementDirection);
             var targetRotationDirection = GetTargetRotationDirection(targetRotationYAngle);
-            var movementSpeed = Context.PlayerData.BaseSpeed * Context.PlayerData.SpeedModifier;
+            var movementSpeed = GroundedData.BaseSpeed * StateMachine.ReusableData.MovementSpeedModifier;
             var currentHorizontalVelocity = GetHorizontalVelocity();
 
-            Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentHorizontalVelocity,
-                ForceMode.VelocityChange);
+            Rigidbody.AddForce(targetRotationDirection * movementSpeed - currentHorizontalVelocity, ForceMode.VelocityChange);
         }
 
         private float Rotate(Vector3 direction)
@@ -122,8 +127,8 @@ namespace Player.StateMachine.Movement.States
 
         private void UpdateData(float directionAngle)
         {
-            _currentTargetRotation.y = directionAngle;
-            _dampedPassedTime.y = 0f;
+            StateMachine.ReusableData.CurrentTargetRotation.y = directionAngle;
+            StateMachine.ReusableData.DampedPassedTime.y = 0f;
         }
 
         protected Vector3 GetTargetRotationDirection(float targetAngle)
@@ -150,7 +155,7 @@ namespace Player.StateMachine.Movement.States
                 }
             }
 
-            if (!directionAngle.Equals(_currentTargetRotation.y))
+            if (!directionAngle.Equals(StateMachine.ReusableData.CurrentTargetRotation.y))
             {
                 UpdateData(directionAngle);
             }
@@ -161,12 +166,11 @@ namespace Player.StateMachine.Movement.States
         protected void RotateTowardsTarget()
         {
             var currentYAngle = Rigidbody.rotation.eulerAngles.y;
-            if (currentYAngle.Equals(_currentTargetRotation.y)) return;
+            if (currentYAngle.Equals(StateMachine.ReusableData.CurrentTargetRotation.y)) return;
 
-            var smoothedYAngle = Mathf.SmoothDampAngle(currentYAngle, _currentTargetRotation.y,
-                ref _dampedCurrentVelocity.y, _timeToReachTargetRotation.y - _dampedPassedTime.y);
+            var smoothedYAngle = Mathf.SmoothDampAngle(currentYAngle, StateMachine.ReusableData.CurrentTargetRotation.y, ref StateMachine.ReusableData.DampedCurrentVelocity.y, StateMachine.ReusableData.TimeToReachTargetRotation.y - StateMachine.ReusableData.DampedPassedTime.y);
 
-            _dampedPassedTime.y += Time.deltaTime;
+            StateMachine.ReusableData.DampedPassedTime.y += Time.deltaTime;
 
             var targetRotation = Quaternion.Euler(0f, smoothedYAngle, 0f);
             Rigidbody.MoveRotation(targetRotation);
