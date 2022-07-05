@@ -1,15 +1,21 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
-        public CharacterController CharacterController;
+        public Rigidbody Rigidbody;
         public Transform CameraTransform;
         public Animator Animator;
         
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsWalk = Animator.StringToHash("IsWalk");
+
+        private void Awake()
+        {
+            CameraTransform = Camera.main.transform;
+        }
 
         public void SetAnimationSpeed(float inputMagnitude, float speedDampTime, float deltaTime)
         {

@@ -10,3 +10,5 @@ GOTA/UserSettings/
 *.csproj
 
 GOTA/.idea/
+
+GOTA/ProjectSettings/RiderScriptEditorPersistedState.asset

@@ -7,10 +7,11 @@ namespace Player
     {
         public event Action<bool> OnWalk;
         public event Action<float> OnIdle;
+        public event Action OnToggle;
+        public event Action OnRun;
 
-        public bool IsWalk;
-        public bool IsGrounded;
-        public bool IsRotationButtonEnable;
+        public bool IsButtonToggled;
+        public bool IsRunEnable;
         
         public Vector3 Position { get; private set; }
 
@@ -19,6 +20,19 @@ namespace Player
             Position = newPosition;
         }
 
+        public void ButtonToggled()
+        {
+            IsButtonToggled = !IsButtonToggled;
+            OnToggle?.Invoke();
+        }
+
+        public void RunEnabled()
+        {
+            IsRunEnable = !IsRunEnable;
+            Debug.Log(IsRunEnable);
+            OnRun?.Invoke();
+        }
+        
         public void Walk(bool isEnable)
         {
             OnWalk?.Invoke(isEnable);

@@ -24,9 +24,27 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "CameraRotate",
-                    "type": "Button",
+                    "name": "Zoom",
+                    "type": "Value",
                     "id": "c1dbed50-6256-4a25-8062-1f45e7145985",
+                    "expectedControlType": "Axis",
+                    "processors": "Clamp(min=-0.1,max=0.1),Invert",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "ToggleButton",
+                    "type": "Button",
+                    "id": "a9a6ccbd-891a-4558-a7ec-03479b7c20f4",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RunButton",
+                    "type": "Button",
+                    "id": "87d061bc-f696-42a0-92b2-ea75cedebfdc",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -158,11 +176,33 @@
                 {
                     "name": "",
                     "id": "eb7cea90-4f58-46cc-b873-39df294823e0",
+                    "path": "<Mouse>/scroll/y",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Zoom",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "72984ca5-98f0-448e-a1f1-ca32b79a468d",
                     "path": "<Keyboard>/leftCtrl",
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "CameraRotate",
+                    "action": "ToggleButton",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "b408d419-c232-40a7-a4cc-562e2de388ad",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunButton",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
