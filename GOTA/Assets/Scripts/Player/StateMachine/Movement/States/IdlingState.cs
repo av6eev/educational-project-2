@@ -21,8 +21,6 @@ namespace Player.StateMachine.Movement.States
         {
             base.LogicUpdate();
             
-            if (MovementInput == Vector2.zero) return;
-
             OnMove();
         }
 

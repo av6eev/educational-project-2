@@ -19,9 +19,14 @@ namespace Player.StateMachine.Movement.States
         {
             base.LogicUpdate();
 
-            if (!Context.PlayerModel.IsButtonToggled)
+            switch (Context.PlayerModel.IsButtonToggled)
             {
-                MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
+                case false:
+                    MovementStateMachine.ChangeState(MovementStateMachine.IdlingState);
+                    break;
+                case true when Context.PlayerModel.IsRunEnable:
+                    MovementStateMachine.ChangeState(MovementStateMachine.RunningState);
+                    break;
             }
         }
     }
