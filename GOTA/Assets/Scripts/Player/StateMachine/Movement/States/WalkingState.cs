@@ -27,7 +27,6 @@ namespace Player.StateMachine.Movement.States
                 case true when Context.PlayerModel.IsRunEnable:
                     StateMachine.ChangeState(StateMachine.RunningState);
                     break;
-                default: return;
             }
         }
     }

@@ -31,14 +31,13 @@ namespace Player.StateMachine.Movement.States
                 if (StateMachine.ReusableData.MovementInput != Vector2.zero)
                 {
                     StateMachine.ChangeState(StateMachine.WalkingState);
-                    Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}; walking state");
-                    return;
+                    Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}");
                 }
             }
             else
             {
                 // StateMachine.ChangeState(); //skill cast system            
-                Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}; skill cast system");
+                Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}");
             }
         }
     }

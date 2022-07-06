@@ -16,7 +16,7 @@ namespace Player.StateMachine.Movement.States
 
         protected InputAction ToggleButton;
         protected InputAction RunButton;
-        
+
         protected readonly MovementStateMachine StateMachine;
 
         protected readonly GroundedData GroundedData;
@@ -25,7 +25,7 @@ namespace Player.StateMachine.Movement.States
         {
             StateMachine = stateMachine;
             Context = context;
-            
+
             GroundedData = Context.PlayerSO.GroundedData;
             Rigidbody = Context.GlobalContainer.PlayerView.Rigidbody;
             View = Context.GlobalContainer.PlayerView;
@@ -120,39 +120,18 @@ namespace Player.StateMachine.Movement.States
         {
             var directionAngle = UpdateTargetRotation(direction);
 
-            RotateTowardsTarget();
+            RotateTowardsTarget(Time.deltaTime);
 
             return directionAngle;
         }
-
-        private void UpdateData(float directionAngle)
-        {
-            StateMachine.ReusableData.CurrentTargetRotation.y = directionAngle;
-            StateMachine.ReusableData.DampedPassedTime.y = 0f;
-        }
-
-        protected Vector3 GetTargetRotationDirection(float targetAngle)
-        {
-            return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
-        }
-
+        
         protected float UpdateTargetRotation(Vector3 direction, bool isConsiderCameraRotation = true)
         {
-            var directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            var directionAngle = GetDirectionAngle(direction);
 
             if (isConsiderCameraRotation)
             {
-                if (directionAngle < 0f)
-                {
-                    directionAngle += 360f;
-                }
-
-                directionAngle += View.CameraTransform.eulerAngles.y;
-
-                if (directionAngle < 360f)
-                {
-                    directionAngle -= 360f;
-                }
+                directionAngle = AddCameraRotationToAngle(directionAngle);
             }
 
             if (!directionAngle.Equals(StateMachine.ReusableData.CurrentTargetRotation.y))
@@ -163,14 +142,17 @@ namespace Player.StateMachine.Movement.States
             return directionAngle;
         }
 
-        protected void RotateTowardsTarget()
+        protected void RotateTowardsTarget(float deltaTime)
         {
             var currentYAngle = Rigidbody.rotation.eulerAngles.y;
             if (currentYAngle.Equals(StateMachine.ReusableData.CurrentTargetRotation.y)) return;
 
-            var smoothedYAngle = Mathf.SmoothDampAngle(currentYAngle, StateMachine.ReusableData.CurrentTargetRotation.y, ref StateMachine.ReusableData.DampedCurrentVelocity.y, StateMachine.ReusableData.TimeToReachTargetRotation.y - StateMachine.ReusableData.DampedPassedTime.y);
+            var smoothedYAngle = Mathf.SmoothDampAngle(currentYAngle, 
+                StateMachine.ReusableData.CurrentTargetRotation.y,
+                ref StateMachine.ReusableData.DampedCurrentVelocity.y,
+                StateMachine.ReusableData.TimeToReachTargetRotation.y - StateMachine.ReusableData.DampedPassedTime.y);
 
-            StateMachine.ReusableData.DampedPassedTime.y += Time.deltaTime;
+            StateMachine.ReusableData.DampedPassedTime.y += deltaTime;
 
             var targetRotation = Quaternion.Euler(0f, smoothedYAngle, 0f);
             Rigidbody.MoveRotation(targetRotation);
@@ -183,9 +165,44 @@ namespace Player.StateMachine.Movement.States
             return horizontalVelocity;
         }
 
+        protected Vector3 GetTargetRotationDirection(float targetAngle)
+        {
+            return Quaternion.Euler(0f, targetAngle, 0f) * Vector3.forward;
+        }
+        
         protected void ResetVelocity()
         {
             Rigidbody.velocity = Vector3.zero;
+        }
+
+        private void UpdateData(float directionAngle)
+        {
+            StateMachine.ReusableData.CurrentTargetRotation.y = directionAngle;
+            StateMachine.ReusableData.DampedPassedTime.y = 0f;
+        }
+        
+        private float AddCameraRotationToAngle(float angle)
+        {
+            angle += View.CameraTransform.eulerAngles.y;
+            
+            if (angle > 360f)
+            {
+                angle -= 360f;
+            }
+
+            return angle;
+        }
+
+        private float GetDirectionAngle(Vector3 direction)
+        {
+            var directionAngle = Mathf.Atan2(direction.x, direction.z) * Mathf.Rad2Deg;
+            
+            if (directionAngle < 0f)
+            {
+                directionAngle += 360f;
+            }
+
+            return directionAngle;
         }
     }
 }
