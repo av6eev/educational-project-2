@@ -25,7 +25,7 @@ public class StartController : MonoBehaviour
         
         _stepEngine.Execute(_context, _controllerEngine, _context.GlobalContainer);
         _controllerEngine.Activate();
-        
+
         _stateMachineEngine = new StateMachineEngine(_context);
         _context.StateMachineEngine = _stateMachineEngine;
     }

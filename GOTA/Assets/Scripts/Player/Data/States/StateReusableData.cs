@@ -6,6 +6,7 @@ namespace Player.Data.States
     {
         public Vector2 MovementInput { get; set; }
         public float MovementSpeedModifier { get; set; } = 1f;
+        public float OnSlopeSpeedModifier { get; set; } = 1f;
         public bool IsButtonToggled { get; set; }
 
         private Vector3 _currentTargetRotation;

@@ -1,5 +1,6 @@
 ﻿using Player.Data.States;
-using Player.StateMachine.Movement.States;
+using Player.StateMachine.Movement.States.Grounded;
+using Player.StateMachine.Movement.States.Moving;
 using Player.StateMachine.Utilities;
 using Utilities;
 

@@ -1,4 +1,6 @@
 ﻿using System;
+using Player.Utilities;
+using Player.Utilities.Data;
 using UnityEngine;
 
 namespace Player
@@ -8,6 +10,8 @@ namespace Player
         public Rigidbody Rigidbody;
         public Transform CameraTransform;
         public Animator Animator;
+        public ColliderUtility ColliderUtility;
+        public LayerData LayerData;
         
         private static readonly int Speed = Animator.StringToHash("Speed");
         private static readonly int IsWalk = Animator.StringToHash("IsWalk");
@@ -15,6 +19,12 @@ namespace Player
         private void Awake()
         {
             CameraTransform = Camera.main.transform;
+        }
+
+        private void OnValidate()
+        {
+            ColliderUtility.Initialize(gameObject);
+            ColliderUtility.CalculateColliderDimensions();
         }
 
         public void SetAnimationSpeed(float inputMagnitude, float speedDampTime, float deltaTime)
