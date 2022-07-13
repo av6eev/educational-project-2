@@ -14,6 +14,7 @@ namespace Player.StateMachine.Movement
         public IdlingState IdlingState { get; }
         public RunningState RunningState { get; }
         public WalkingState WalkingState { get; }
+        public DashingState DashingState { get; }
 
         public MovementStateMachine(StateMachineEngine stateMachineEngine, GameContext context)
         {
@@ -25,6 +26,7 @@ namespace Player.StateMachine.Movement
             IdlingState = new IdlingState(this, context);
             RunningState = new RunningState(this, context);
             WalkingState = new WalkingState(this, context);
+            DashingState = new DashingState(this, context);
         }
     }
 }

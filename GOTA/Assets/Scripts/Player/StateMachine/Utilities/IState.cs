@@ -7,5 +7,8 @@
         public void HandleInput();
         public void LogicUpdate();
         public void PhysicsUpdate();
+        public void OnAnimationEnter();
+        public void OnAnimationExit();
+        public void OnAnimationTransition();
     }
 }

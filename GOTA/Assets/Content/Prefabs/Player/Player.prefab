@@ -574,6 +574,7 @@ GameObject:
   - component: {fileID: 4271402015799452555}
   - component: {fileID: 4271402015799452554}
   - component: {fileID: 4271402015799452557}
+  - component: {fileID: 7476405911111653583}
   m_Layer: 0
   m_Name: Player
   m_TagString: Player
@@ -621,6 +622,7 @@ MonoBehaviour:
     <SlopeData>k__BackingField:
       <StepHeightPercentage>k__BackingField: 0.25
       <RayDistance>k__BackingField: 2
+      <StepReachForce>k__BackingField: 25
   LayerData:
     <GroundLayer>k__BackingField:
       serializedVersion: 2
@@ -706,6 +708,18 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &7476405911111653583
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4271402015799452551}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed0deef18e254e8287ff9ec6ec32b6a9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &4271402015827847134
 GameObject:
   m_ObjectHideFlags: 0

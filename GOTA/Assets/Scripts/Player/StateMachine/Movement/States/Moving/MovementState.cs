@@ -16,6 +16,7 @@ namespace Player.StateMachine.Movement.States.Moving
 
         protected InputAction ToggleButton;
         protected InputAction RunButton;
+        protected InputAction DashButton;
 
         protected readonly MovementStateMachine StateMachine;
 
@@ -59,10 +60,12 @@ namespace Player.StateMachine.Movement.States.Moving
         {
             ToggleButton = Context.InputModel.InputActions[InputActionsConstants.ToggleButton];
             RunButton = Context.InputModel.InputActions[InputActionsConstants.RunButton];
+            DashButton = Context.InputModel.InputActions[InputActionsConstants.Dash];
 
             ToggleButton.started += OnToggle;
             RunButton.started += OnRun;
             RunButton.canceled += OnRun;
+            DashButton.started += OnDash;
         }
 
         private void RemoveInputCallbacks()
@@ -70,6 +73,12 @@ namespace Player.StateMachine.Movement.States.Moving
             ToggleButton.started -= OnToggle;
             RunButton.started -= OnRun;
             RunButton.canceled -= OnRun;
+            DashButton.started -= OnDash;
+        }
+
+        protected virtual void OnDash(InputAction.CallbackContext ctx)
+        {
+            StateMachine.ChangeState(StateMachine.DashingState);
         }
 
         private void OnRun(InputAction.CallbackContext ctx)
@@ -97,6 +106,18 @@ namespace Player.StateMachine.Movement.States.Moving
         public virtual void PhysicsUpdate()
         {
             Move();
+        }
+
+        public virtual void OnAnimationEnter()
+        {
+        }
+
+        public virtual void OnAnimationExit()
+        {
+        }
+
+        public virtual void OnAnimationTransition()
+        {
         }
 
         private void Move()
@@ -208,6 +229,18 @@ namespace Player.StateMachine.Movement.States.Moving
             }
 
             return directionAngle;
+        }
+
+        protected float GetMovementSpeed(bool isConsiderSlopes = true)
+        {
+            var movementSpeed = GroundedData.BaseSpeed * StateMachine.ReusableData.MovementSpeedModifier;
+            
+            if (isConsiderSlopes)
+            {
+                movementSpeed *= StateMachine.ReusableData.OnSlopeSpeedModifier;
+            }
+
+            return movementSpeed;
         }
     }
 }

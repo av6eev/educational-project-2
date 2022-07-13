@@ -12,5 +12,6 @@ namespace Player.Data.States
         [field: SerializeField] public RotationData RotationData { get; private set; }
         [field: SerializeField] public WalkData WalkData { get; private set; }
         [field: SerializeField] public RunData RunData { get; private set; }
+        [field: SerializeField] public DashData DashData { get; private set; }
     }
 }

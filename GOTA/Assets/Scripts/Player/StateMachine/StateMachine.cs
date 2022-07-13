@@ -34,5 +34,20 @@ namespace Player.StateMachine
         {
             return _currentState;
         }
+
+        public void OnAnimationEnter()
+        {
+            _currentState?.OnAnimationEnter();
+        }
+        
+        public void OnAnimationExit()
+        {
+            _currentState?.OnAnimationExit();
+        }
+        
+        public void OnAnimationTransition()
+        {
+            _currentState?.OnAnimationTransition();
+        }
     }
 }
