@@ -17,24 +17,10 @@ namespace Player
 
         public void Deactivate()
         {
-            _model.OnWalk -= Walk;
-            _model.OnIdle -= Idle;
         }
 
         public void Activate()
         {
-            _model.OnWalk += Walk;
-            _model.OnIdle += Idle;
-        }
-
-        private void Idle(float speed)
-        {
-            _view.Idle(speed);
-        }
-
-        private void Walk(bool isEnable)
-        {
-            _view.Walk(isEnable);
         }
     }
 }

@@ -7,7 +7,9 @@ namespace Player.Data.States
         public Vector2 MovementInput { get; set; }
         public float MovementSpeedModifier { get; set; } = 1f;
         public float OnSlopeSpeedModifier { get; set; } = 1f;
+        public float DecelerationForce { get; set; } = 1f;
         public bool IsButtonToggled { get; set; }
+        public bool IsRunning { get; set; }
 
         private Vector3 _currentTargetRotation;
         private Vector3 _timeToReachTargetRotation;
@@ -18,5 +20,6 @@ namespace Player.Data.States
         public ref Vector3 TimeToReachTargetRotation => ref _timeToReachTargetRotation;
         public ref Vector3 DampedCurrentVelocity => ref _dampedCurrentVelocity;
         public ref Vector3 DampedPassedTime => ref _dampedPassedTime;
+        public RotationData RotationData { get; set; }
     }
 }

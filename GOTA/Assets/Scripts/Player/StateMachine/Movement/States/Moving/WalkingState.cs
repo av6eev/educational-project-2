@@ -1,4 +1,5 @@
-﻿using Utilities;
+﻿using UnityEngine.InputSystem;
+using Utilities;
 
 namespace Player.StateMachine.Movement.States.Moving
 {
@@ -18,16 +19,13 @@ namespace Player.StateMachine.Movement.States.Moving
         public override void LogicUpdate()
         {
             base.LogicUpdate();
+        
+            OnMove();
+        }
 
-            switch (StateMachine.ReusableData.IsButtonToggled)
-            {
-                case false:
-                    StateMachine.ChangeState(StateMachine.IdlingState);
-                    break;
-                case true when Context.PlayerModel.IsRunEnable:
-                    StateMachine.ChangeState(StateMachine.RunningState);
-                    break;
-            }
+        protected override void OnMoveCanceled(InputAction.CallbackContext ctx)
+        {
+            StateMachine.ChangeState(StateMachine.LightStoppingState);
         }
     }
 }

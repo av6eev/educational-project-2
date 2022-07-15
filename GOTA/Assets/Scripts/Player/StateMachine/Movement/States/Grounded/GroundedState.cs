@@ -1,5 +1,4 @@
-﻿using Player.StateMachine.Movement.States.Moving;
-using Player.Utilities.Data;
+﻿using Player.Utilities.Data;
 using UnityEngine;
 using Utilities;
 
@@ -50,6 +49,28 @@ namespace Player.StateMachine.Movement.States.Grounded
             
             StateMachine.ReusableData.OnSlopeSpeedModifier = slopeSpeedModifier;
             return slopeSpeedModifier;
+        }
+        
+        protected virtual void OnMove()
+        {
+            if (StateMachine.ReusableData.MovementInput == Vector2.zero)
+            {
+                StateMachine.ChangeState(StateMachine.IdlingState);
+            }
+            
+            switch (StateMachine.ReusableData.IsButtonToggled)
+            {
+                case false:
+                    StateMachine.ChangeState(StateMachine.IdlingState);
+                    //TODO: skill cast system
+                    break;
+                case true when !StateMachine.ReusableData.IsRunning:
+                    StateMachine.ChangeState(StateMachine.WalkingState);
+                    break;
+                case true when StateMachine.ReusableData.IsRunning:
+                    StateMachine.ChangeState(StateMachine.RunningState);
+                    break;
+            }
         }
     }
 }

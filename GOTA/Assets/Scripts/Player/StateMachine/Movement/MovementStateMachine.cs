@@ -1,6 +1,7 @@
 ﻿using Player.Data.States;
 using Player.StateMachine.Movement.States.Grounded;
 using Player.StateMachine.Movement.States.Moving;
+using Player.StateMachine.Movement.States.Stopping;
 using Player.StateMachine.Utilities;
 using Utilities;
 
@@ -15,6 +16,10 @@ namespace Player.StateMachine.Movement
         public RunningState RunningState { get; }
         public WalkingState WalkingState { get; }
         public DashingState DashingState { get; }
+        
+        public LightStoppingState LightStoppingState { get; }
+        public MediumStoppingState MediumStoppingState { get; }
+        public HardStoppingState HardStoppingState { get; }
 
         public MovementStateMachine(StateMachineEngine stateMachineEngine, GameContext context)
         {
@@ -27,6 +32,10 @@ namespace Player.StateMachine.Movement
             RunningState = new RunningState(this, context);
             WalkingState = new WalkingState(this, context);
             DashingState = new DashingState(this, context);
+
+            LightStoppingState = new LightStoppingState(this, context);
+            MediumStoppingState = new MediumStoppingState(this, context);
+            HardStoppingState = new HardStoppingState(this, context);
         }
     }
 }

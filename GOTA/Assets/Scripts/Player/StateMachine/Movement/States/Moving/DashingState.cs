@@ -12,6 +12,7 @@ namespace Player.StateMachine.Movement.States.Moving
         private DashData _dashData;
         private float _startTime;
         private int _consecutiveDashesUsed;
+        private bool _isKeepRotating;
         
         public DashingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
@@ -22,28 +23,41 @@ namespace Player.StateMachine.Movement.States.Moving
         {
             base.Enter();
             StateMachine.ReusableData.MovementSpeedModifier = _dashData.SpeedModifier;
+            StateMachine.ReusableData.RotationData = _dashData.RotationData;
             
-            AddForce();
+            Dash();
+            _isKeepRotating = StateMachine.ReusableData.MovementInput != Vector2.zero;
             UpdateConsecutiveDashes();
             
             _startTime = Time.time;
         }
 
-        protected override void OnDash(InputAction.CallbackContext ctx)
+        public override void Exit()
         {
+            base.Exit();
+            SetRotationData();
+        }
+
+        public override void PhysicsUpdate()
+        {
+            base.PhysicsUpdate();
+            
+            if (!_isKeepRotating) return;
+            RotateTowardsTarget();
         }
 
         public override void OnAnimationTransition()
         {
             base.OnAnimationTransition();
             
+            Debug.Log(StateMachine.ReusableData.MovementInput);
             if (StateMachine.ReusableData.MovementInput == Vector2.zero)
             {  
-                StateMachine.ChangeState(StateMachine.IdlingState);
+                StateMachine.ChangeState(StateMachine.HardStoppingState);
                 return;
             }
 
-            StateMachine.ChangeState(StateMachine.RunningState);
+            OnMove();
         }
 
         private void UpdateConsecutiveDashes()
@@ -68,7 +82,7 @@ namespace Player.StateMachine.Movement.States.Moving
             return Time.time < _startTime + _dashData.ConsideredConsecutiveTime;
         }
 
-        private void AddForce()
+        private void Dash()
         {
             if (StateMachine.ReusableData.MovementInput != Vector2.zero)
             {
@@ -77,7 +91,34 @@ namespace Player.StateMachine.Movement.States.Moving
 
             var rotationDirection = View.transform.forward;
             rotationDirection.y = 0f;
+            
+            UpdateTargetRotation(rotationDirection, false);
             View.Rigidbody.velocity = rotationDirection * GetMovementSpeed();
+        }
+        
+        protected override void AddInputCallbacks()
+        {
+            base.AddInputCallbacks();
+            MoveAction.performed += OnMovePerformed;
+        }
+
+        protected override void RemoveInputCallbacks()
+        {
+            base.RemoveInputCallbacks();
+            MoveAction.performed -= OnMovePerformed;
+        }
+        
+        private void OnMovePerformed(InputAction.CallbackContext ctx)
+        {
+            _isKeepRotating = true;
+        }
+        
+        protected override void OnMoveCanceled(InputAction.CallbackContext ctx)
+        {
+        }
+
+        protected override void OnDash(InputAction.CallbackContext ctx)
+        {
         }
     }
 }

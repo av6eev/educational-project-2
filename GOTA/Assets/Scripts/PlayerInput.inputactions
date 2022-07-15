@@ -42,9 +42,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "RunButton",
+                    "name": "RunStart",
                     "type": "Button",
                     "id": "87d061bc-f696-42a0-92b2-ea75cedebfdc",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "RunCancel",
+                    "type": "Button",
+                    "id": "65d9e923-4871-43ba-bd2c-2e372b0d1e5f",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -207,11 +216,22 @@
                 {
                     "name": "",
                     "id": "b408d419-c232-40a7-a4cc-562e2de388ad",
-                    "path": "<Keyboard>/leftShift",
-                    "interactions": "",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press",
                     "processors": "",
                     "groups": "",
-                    "action": "RunButton",
+                    "action": "RunStart",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "22279fe0-17dd-448d-a124-1b1ce31cde59",
+                    "path": "<Keyboard>/shift",
+                    "interactions": "Press(behavior=1)",
+                    "processors": "",
+                    "groups": "",
+                    "action": "RunCancel",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },

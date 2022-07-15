@@ -21,24 +21,16 @@ namespace Player.StateMachine.Movement.States.Grounded
         {
             base.LogicUpdate();
             
+            if (StateMachine.ReusableData.MovementInput == Vector2.zero) return;
             OnMove();
         }
-        
-        private void OnMove()
+
+        public override void PhysicsUpdate()
         {
-            if (StateMachine.ReusableData.IsButtonToggled)
-            {
-                if (StateMachine.ReusableData.MovementInput != Vector2.zero)
-                {
-                    StateMachine.ChangeState(StateMachine.WalkingState);
-                    Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}");
-                }
-            }
-            else
-            {
-                // StateMachine.ChangeState(); //skill cast system            
-                Debug.Log($"Toggle: {StateMachine.ReusableData.IsButtonToggled}");
-            }
+            base.PhysicsUpdate();
+
+            if (!IsMovingHorizontally()) return;
+            ResetVelocity();
         }
     }
 }

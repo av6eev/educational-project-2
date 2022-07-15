@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
-using UnityEngine.Windows;
 
 namespace InputManager
 {
