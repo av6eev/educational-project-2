@@ -16,7 +16,7 @@ namespace Player.StateMachine.Movement.States.Grounded
         public override void PhysicsUpdate()
         {
             base.PhysicsUpdate();
-
+            
             Floating();
         }
 
@@ -53,11 +53,6 @@ namespace Player.StateMachine.Movement.States.Grounded
         
         protected virtual void OnMove()
         {
-            if (StateMachine.ReusableData.MovementInput == Vector2.zero)
-            {
-                StateMachine.ChangeState(StateMachine.IdlingState);
-            }
-            
             switch (StateMachine.ReusableData.IsButtonToggled)
             {
                 case false:

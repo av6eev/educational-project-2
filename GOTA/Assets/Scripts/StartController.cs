@@ -17,20 +17,21 @@ public class StartController : MonoBehaviour
     private readonly StepEngine _stepEngine = new StepEngine();
     private StateMachineEngine _stateMachineEngine;
     
-    void Start()
+    private void Start()
     {
         _context.GlobalContainer = _container;
         _context.CameraData = _cameraData;
         _context.PlayerSO = _playerSO;
         
         _stepEngine.Execute(_context, _controllerEngine, _context.GlobalContainer);
-        _controllerEngine.Activate();
 
         _stateMachineEngine = new StateMachineEngine(_context);
         _context.StateMachineEngine = _stateMachineEngine;
+        
+        _controllerEngine.Activate();
     }
 
-    void Update()
+    private void Update()
     {
         _stateMachineEngine.GetStateMachine(StateMachineType.Movement).HandleInput();
         _stateMachineEngine.GetStateMachine(StateMachineType.Movement).LogicUpdate();

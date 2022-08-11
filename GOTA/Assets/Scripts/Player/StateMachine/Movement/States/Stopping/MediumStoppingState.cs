@@ -13,6 +13,7 @@ namespace Player.StateMachine.Movement.States.Stopping
             base.Enter();
 
             StateMachine.ReusableData.DecelerationForce = GroundedData.StopData.MediumDecelerationForce;
+            StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.MediumForce;
         }
     }
 }

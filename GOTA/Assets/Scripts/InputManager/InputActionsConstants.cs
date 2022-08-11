@@ -7,5 +7,6 @@
         public const string RunStart = "RunStart";
         public const string RunCancel = "RunCancel";
         public const string Dash = "Dash";
+        public const string Jump = "Jump";
     }
 }

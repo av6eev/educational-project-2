@@ -1,4 +1,5 @@
-﻿using Utilities;
+﻿using Player.StateMachine.Utilities;
+using Utilities;
 
 namespace Player
 {
@@ -18,7 +19,7 @@ namespace Player
         public void Deactivate()
         {
         }
-
+        
         public void Activate()
         {
         }

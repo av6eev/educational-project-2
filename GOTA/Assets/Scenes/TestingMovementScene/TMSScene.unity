@@ -1659,6 +1659,21 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 3556202881193725162, guid: 7bbd0c4cf920d5c4f81e12671026006d,
+        type: 3}
+      propertyPath: m_Center.y
+      value: 0.09
+      objectReference: {fileID: 0}
+    - target: {fileID: 3556202881193725162, guid: 7bbd0c4cf920d5c4f81e12671026006d,
+        type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271402015799452550, guid: 7bbd0c4cf920d5c4f81e12671026006d,
+        type: 3}
+      propertyPath: m_AngularDrag
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4271402015799452551, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
       propertyPath: m_Name
@@ -1672,7 +1687,7 @@ PrefabInstance:
     - target: {fileID: 4271402015799452552, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.27
+      value: 24.96
       objectReference: {fileID: 0}
     - target: {fileID: 4271402015799452552, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
@@ -1682,7 +1697,7 @@ PrefabInstance:
     - target: {fileID: 4271402015799452552, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -13.04
+      value: -12.46
       objectReference: {fileID: 0}
     - target: {fileID: 4271402015799452552, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
@@ -1731,6 +1746,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4271402015799452553, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
+      propertyPath: ColliderUtility.<SlopeData>k__BackingField.<RayDistance>k__BackingField
+      value: 1.12
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271402015799452553, guid: 7bbd0c4cf920d5c4f81e12671026006d,
+        type: 3}
+      propertyPath: ColliderUtility.<DefaultColliderData>k__BackingField.<Height>k__BackingField
+      value: 1.8
+      objectReference: {fileID: 0}
+    - target: {fileID: 4271402015799452553, guid: 7bbd0c4cf920d5c4f81e12671026006d,
+        type: 3}
       propertyPath: ColliderUtility.<SlopeData>k__BackingField.<StepHeightPercentage>k__BackingField
       value: 0.25
       objectReference: {fileID: 0}
@@ -1742,7 +1767,7 @@ PrefabInstance:
     - target: {fileID: 4271402015799452555, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
       propertyPath: m_Height
-      value: 1.425
+      value: 1.3499999
       objectReference: {fileID: 0}
     - target: {fileID: 4271402015799452555, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
@@ -1752,7 +1777,7 @@ PrefabInstance:
     - target: {fileID: 4271402015799452555, guid: 7bbd0c4cf920d5c4f81e12671026006d,
         type: 3}
       propertyPath: m_Center.y
-      value: 1.1375
+      value: 1.125
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 7bbd0c4cf920d5c4f81e12671026006d, type: 3}
@@ -1937,7 +1962,7 @@ PrefabInstance:
     - target: {fileID: 2836488774820257248, guid: a8a4aa0c03ae75e44ba1111ebfc2915a,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.27
+      value: 24.96
       objectReference: {fileID: 0}
     - target: {fileID: 2836488774820257248, guid: a8a4aa0c03ae75e44ba1111ebfc2915a,
         type: 3}
@@ -1947,7 +1972,7 @@ PrefabInstance:
     - target: {fileID: 2836488774820257248, guid: a8a4aa0c03ae75e44ba1111ebfc2915a,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.04
+      value: -22.46
       objectReference: {fileID: 0}
     - target: {fileID: 2836488774820257248, guid: a8a4aa0c03ae75e44ba1111ebfc2915a,
         type: 3}
@@ -3028,7 +3053,7 @@ PrefabInstance:
     - target: {fileID: 952514425998993141, guid: 05eb28d2bd6765f40abcb05786b9e8bd,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: 26.27
+      value: 24.96
       objectReference: {fileID: 0}
     - target: {fileID: 952514425998993141, guid: 05eb28d2bd6765f40abcb05786b9e8bd,
         type: 3}
@@ -3038,7 +3063,7 @@ PrefabInstance:
     - target: {fileID: 952514425998993141, guid: 05eb28d2bd6765f40abcb05786b9e8bd,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: -23.04
+      value: -22.46
       objectReference: {fileID: 0}
     - target: {fileID: 952514425998993141, guid: 05eb28d2bd6765f40abcb05786b9e8bd,
         type: 3}

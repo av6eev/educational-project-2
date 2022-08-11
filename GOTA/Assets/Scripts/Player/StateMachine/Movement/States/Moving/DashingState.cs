@@ -23,6 +23,7 @@ namespace Player.StateMachine.Movement.States.Moving
         {
             base.Enter();
             StateMachine.ReusableData.MovementSpeedModifier = _dashData.SpeedModifier;
+            StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.StrongForce;
             StateMachine.ReusableData.RotationData = _dashData.RotationData;
             
             Dash();
@@ -50,7 +51,6 @@ namespace Player.StateMachine.Movement.States.Moving
         {
             base.OnAnimationTransition();
             
-            Debug.Log(StateMachine.ReusableData.MovementInput);
             if (StateMachine.ReusableData.MovementInput == Vector2.zero)
             {  
                 StateMachine.ChangeState(StateMachine.HardStoppingState);

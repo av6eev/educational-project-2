@@ -71,7 +71,6 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 0.225
     <RunData>k__BackingField:
       <SpeedModifier>k__BackingField: 1
-      <RunToWalkTime>k__BackingField: 1
     <DashData>k__BackingField:
       <SpeedModifier>k__BackingField: 2
       <ConsideredConsecutiveTime>k__BackingField: 1
@@ -83,3 +82,9 @@ MonoBehaviour:
       <LightDecelerationForce>k__BackingField: 5
       <MediumDecelerationForce>k__BackingField: 6.5
       <HardDecelerationForce>k__BackingField: 5
+  <AirborneData>k__BackingField:
+    <JumpData>k__BackingField:
+      <StationaryForce>k__BackingField: {x: 0, y: 5, z: 0}
+      <WeakForce>k__BackingField: {x: 1, y: 5, z: 1}
+      <MediumForce>k__BackingField: {x: 3.5, y: 5, z: 3.5}
+      <StrongForce>k__BackingField: {x: 5, y: 5, z: 5}

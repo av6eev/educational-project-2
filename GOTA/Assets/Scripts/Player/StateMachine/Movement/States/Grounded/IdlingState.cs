@@ -14,6 +14,8 @@ namespace Player.StateMachine.Movement.States.Grounded
             base.Enter();
             
             StateMachine.ReusableData.MovementSpeedModifier = 0f;
+            StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.StationaryForce;
+            
             ResetVelocity();
         }
 

@@ -18,9 +18,11 @@ namespace Player.StateMachine.Movement.States
         private InputAction _runStarted;
         private InputAction _runCanceled;
         private InputAction _dashButton;
+        private InputAction _jumpAction;
 
         protected readonly MovementStateMachine StateMachine;
         protected readonly GroundedData GroundedData;
+        protected readonly AirborneData AirborneData;
 
         public MovementState(MovementStateMachine stateMachine, GameContext context)
         {
@@ -28,6 +30,8 @@ namespace Player.StateMachine.Movement.States
             Context = context;
 
             GroundedData = Context.PlayerSO.GroundedData;
+            AirborneData = Context.PlayerSO.AirborneData;
+            
             _rigidbody = Context.GlobalContainer.PlayerView.Rigidbody;
             View = Context.GlobalContainer.PlayerView;
 
@@ -43,6 +47,7 @@ namespace Player.StateMachine.Movement.States
             _dashButton = Context.InputModel.InputActions[InputActionsConstants.Dash];
             _runStarted = Context.InputModel.InputActions[InputActionsConstants.RunStart];
             _runCanceled = Context.InputModel.InputActions[InputActionsConstants.RunCancel];
+            _jumpAction = Context.InputModel.InputActions[InputActionsConstants.Jump];
         }
 
         #region Default Methods
@@ -71,6 +76,9 @@ namespace Player.StateMachine.Movement.States
         public virtual void PhysicsUpdate()
         {
             Move();
+            GroundCheck();
+            
+            Debug.Log(StateMachine.ReusableData.IsGrounded);
         }
 
         public virtual void OnAnimationEnter()
@@ -84,7 +92,6 @@ namespace Player.StateMachine.Movement.States
         public virtual void OnAnimationTransition()
         {
         }
-
         #endregion
         
         protected virtual void AddInputCallbacks()
@@ -94,6 +101,7 @@ namespace Player.StateMachine.Movement.States
             _dashButton.started += OnDash;
             _runStarted.performed += ctx => StateMachine.ReusableData.IsRunning = true;
             _runCanceled.performed += ctx =>  StateMachine.ReusableData.IsRunning = false;
+            _jumpAction.started += OnJump;
         }
 
         protected virtual void RemoveInputCallbacks()
@@ -101,10 +109,19 @@ namespace Player.StateMachine.Movement.States
             MoveAction.canceled -= OnMoveCanceled;
             _toggleButton.started -= OnToggle;
             _dashButton.started -= OnDash;
+            _jumpAction.started -= OnJump;
         }
 
         protected virtual void OnMoveCanceled(InputAction.CallbackContext ctx)
         {
+        }
+        
+        protected virtual void OnJump(InputAction.CallbackContext ctx)
+        {
+            if (StateMachine.ReusableData.IsGrounded)
+            {
+                StateMachine.ChangeState(StateMachine.JumpingState);
+            }
         }
         
         protected virtual void OnDash(InputAction.CallbackContext ctx)
@@ -124,7 +141,6 @@ namespace Player.StateMachine.Movement.States
         {
             if (StateMachine.ReusableData.MovementInput == Vector2.zero || StateMachine.ReusableData.MovementSpeedModifier == 0f)
             {
-                _rigidbody.velocity = Vector3.zero;
                 return;
             }
 
@@ -135,6 +151,14 @@ namespace Player.StateMachine.Movement.States
             var currentHorizontalVelocity = GetHorizontalVelocity();
 
             _rigidbody.AddForce(targetRotationDirection * movementSpeed - currentHorizontalVelocity, ForceMode.VelocityChange);
+        }
+        
+        private void GroundCheck()
+        {
+            var worldColliderCenter = View.ColliderUtility.CapsuleColliderData.Collider.bounds.center;
+            var ray = new Ray(worldColliderCenter, Vector3.down);
+
+            StateMachine.ReusableData.IsGrounded = Physics.Raycast(ray, View.ColliderUtility.SlopeData.RayDistance, View.LayerData.GroundLayer);
         }
 
         private float Rotate(Vector3 direction)
@@ -263,7 +287,6 @@ namespace Player.StateMachine.Movement.States
         {
             _rigidbody.velocity = Vector3.zero;
         }
-        
         #endregion
     }
 }

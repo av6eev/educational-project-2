@@ -1,7 +1,7 @@
-﻿using System;
-using Player.Utilities;
+﻿using Player.Utilities;
 using Player.Utilities.Data;
 using UnityEngine;
+using Utilities;
 
 namespace Player
 {
@@ -13,15 +13,18 @@ namespace Player
         public ColliderUtility ColliderUtility;
         public LayerData LayerData;
 
+        private readonly GameContext _context = new GameContext();
+        
         private void Awake()
         {
             CameraTransform = Camera.main.transform;
         }
-
+        
         private void OnValidate()
         {
             ColliderUtility.Initialize(gameObject);
             ColliderUtility.CalculateColliderDimensions();
         }
+
     }
 }

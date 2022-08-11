@@ -13,8 +13,8 @@ namespace Player.StateMachine.Movement.States.Stopping
 
         public override void Enter()
         {
-            base.Enter();
             StateMachine.ReusableData.MovementSpeedModifier = 0f;
+            base.Enter();
         }
 
         public override void PhysicsUpdate()

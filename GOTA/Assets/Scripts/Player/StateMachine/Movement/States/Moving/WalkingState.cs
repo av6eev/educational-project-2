@@ -14,6 +14,7 @@ namespace Player.StateMachine.Movement.States.Moving
             base.Enter();
 
             StateMachine.ReusableData.MovementSpeedModifier = GroundedData.WalkData.SpeedModifier;
+            StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.WeakForce;
         }
 
         public override void LogicUpdate()
