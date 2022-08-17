@@ -1,6 +1,5 @@
 ﻿using System;
 using Cinemachine;
-using ScriptableObjects;
 using UnityEngine;
 
 namespace CameraManager

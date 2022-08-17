@@ -5,7 +5,7 @@ using UnityEngine.InputSystem;
 using Utilities;
 using IState = Player.StateMachine.Utilities.IState;
 
-namespace Player.StateMachine.Movement.States
+namespace Player.StateMachine.Movement.States.Base
 {
     public class MovementState : IState
     {
@@ -24,7 +24,7 @@ namespace Player.StateMachine.Movement.States
         protected readonly GroundedData GroundedData;
         protected readonly AirborneData AirborneData;
 
-        public MovementState(MovementStateMachine stateMachine, GameContext context)
+        protected MovementState(MovementStateMachine stateMachine, GameContext context)
         {
             StateMachine = stateMachine;
             Context = context;
@@ -69,29 +69,19 @@ namespace Player.StateMachine.Movement.States
             StateMachine.ReusableData.MovementInput = Context.InputModel.InputActions[InputActionsConstants.Movement].ReadValue<Vector2>();
         }
 
-        public virtual void LogicUpdate()
-        {
-        }
+        public virtual void LogicUpdate(){}
 
         public virtual void PhysicsUpdate()
         {
             Move();
             GroundCheck();
-            
-            Debug.Log(StateMachine.ReusableData.IsGrounded);
         }
 
-        public virtual void OnAnimationEnter()
-        {
-        }
+        public virtual void OnAnimationEnter(){}
 
-        public virtual void OnAnimationExit()
-        {
-        }
+        public virtual void OnAnimationExit(){}
 
-        public virtual void OnAnimationTransition()
-        {
-        }
+        public virtual void OnAnimationTransition(){}
         #endregion
         
         protected virtual void AddInputCallbacks()
@@ -112,13 +102,11 @@ namespace Player.StateMachine.Movement.States
             _jumpAction.started -= OnJump;
         }
 
-        protected virtual void OnMoveCanceled(InputAction.CallbackContext ctx)
-        {
-        }
+        protected virtual void OnMoveCanceled(InputAction.CallbackContext ctx){}
         
         protected virtual void OnJump(InputAction.CallbackContext ctx)
         {
-            if (StateMachine.ReusableData.IsGrounded)
+            if (StateMachine.ReusableData.IsGrounded && StateMachine.ReusableData.IsButtonToggled)
             {
                 StateMachine.ChangeState(StateMachine.JumpingState);
             }
@@ -159,8 +147,17 @@ namespace Player.StateMachine.Movement.States
             var ray = new Ray(worldColliderCenter, Vector3.down);
 
             StateMachine.ReusableData.IsGrounded = Physics.Raycast(ray, View.ColliderUtility.SlopeData.RayDistance, View.LayerData.GroundLayer);
-        }
 
+            if (StateMachine.ReusableData.IsGrounded)
+            {
+                OnGroundContact();
+            }
+            else
+            {
+                OnGroundExited();
+            }
+        }
+        
         private float Rotate(Vector3 direction)
         {
             var directionAngle = UpdateTargetRotation(direction);
@@ -217,14 +214,31 @@ namespace Player.StateMachine.Movement.States
         protected void DecelerateHorizontally()
         {
             var horizontalVelocity = GetHorizontalVelocity();
-            View.Rigidbody.AddForce(-horizontalVelocity * StateMachine.ReusableData.DecelerationForce, ForceMode.Acceleration);
+            _rigidbody.AddForce(-horizontalVelocity * StateMachine.ReusableData.DecelerationForce, ForceMode.Acceleration);
+        }
+        
+        protected void DecelerateVertically()
+        {
+            var verticalVelocity = GetVerticalVelocity();
+            _rigidbody.AddForce(-verticalVelocity * StateMachine.ReusableData.DecelerationForce, ForceMode.Acceleration);
         }
 
         protected bool IsMovingHorizontally(float minMagnitude = 0.1f)
         {
             var horizontalVelocity = GetHorizontalVelocity();
             var horizontalMovement = new Vector2(horizontalVelocity.x, horizontalVelocity.z);
+            
             return horizontalMovement.magnitude > minMagnitude;
+        }
+
+        protected bool IsMovingUp(float minVelocity = .1f)
+        {
+            return GetVerticalVelocity().y > minVelocity;
+        }
+        
+        protected bool IsMovingDown(float minVelocity = .1f)
+        {
+            return GetVerticalVelocity().y < -minVelocity;
         }
         
         protected void SetRotationData()
@@ -275,7 +289,7 @@ namespace Player.StateMachine.Movement.States
 
         protected Vector3 GetVerticalVelocity()
         {
-            return new Vector3(0f, View.Rigidbody.velocity.y, 0f);
+            return new Vector3(0f, _rigidbody.velocity.y, 0f);
         }
 
         protected Vector3 GetTargetRotationDirection(float targetAngle)
@@ -287,6 +301,18 @@ namespace Player.StateMachine.Movement.States
         {
             _rigidbody.velocity = Vector3.zero;
         }
+
+        protected void ResetVerticalVelocity()
+        {
+            var horizontalVelocity = GetHorizontalVelocity();
+            
+            _rigidbody.velocity = horizontalVelocity;
+        }
+
+        protected virtual void OnGroundExited(){}
+        
+        protected virtual void OnGroundContact(){}
+        
         #endregion
     }
 }

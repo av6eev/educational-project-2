@@ -1,4 +1,5 @@
-﻿using UnityEngine.InputSystem;
+﻿using Player.StateMachine.Movement.States.Moving.Base;
+using UnityEngine.InputSystem;
 using Utilities;
 
 namespace Player.StateMachine.Movement.States.Moving
@@ -15,13 +16,6 @@ namespace Player.StateMachine.Movement.States.Moving
 
             StateMachine.ReusableData.MovementSpeedModifier = GroundedData.RunData.SpeedModifier;
             StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.StrongForce;
-        }
-
-        public override void LogicUpdate()
-        {
-            base.LogicUpdate();
-            
-            OnMove();
         }
 
         protected override void OnMoveCanceled(InputAction.CallbackContext ctx)

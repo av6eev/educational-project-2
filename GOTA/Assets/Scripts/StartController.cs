@@ -1,7 +1,7 @@
+using CameraManager;
 using Player.Data.ScriptableObjects;
 using Player.StateMachine;
 using Player.StateMachine.Utilities;
-using ScriptableObjects;
 using UnityEngine;
 using Utilities;
 

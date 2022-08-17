@@ -1,8 +1,8 @@
-﻿using InputManager;
+﻿using CameraManager;
+using InputManager;
 using Player;
 using Player.Data.ScriptableObjects;
 using Player.StateMachine;
-using ScriptableObjects;
 
 namespace Utilities
 {

@@ -7,5 +7,6 @@ namespace Player.Data.States
     public class AirborneData
     {
         [field: SerializeField] public JumpData JumpData { get; private set; }
+        [field: SerializeField] public FallData FallData { get; private set; }
     }
 }

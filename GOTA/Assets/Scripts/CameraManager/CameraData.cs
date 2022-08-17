@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace ScriptableObjects
+namespace CameraManager
 {
     [CreateAssetMenu(fileName = "New Camera Data", menuName = "Camera Data", order = 52)]
     public class CameraData : ScriptableObject

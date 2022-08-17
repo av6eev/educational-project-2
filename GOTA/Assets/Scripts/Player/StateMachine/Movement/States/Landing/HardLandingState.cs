@@ -1,30 +1,36 @@
-﻿using Player.StateMachine.Movement.States.Grounded;
+﻿using System;
+using Player.StateMachine.Movement.States.Landing.Base;
 using UnityEngine.InputSystem;
 using Utilities;
 
-namespace Player.StateMachine.Movement.States.Stopping
+namespace Player.StateMachine.Movement.States.Landing
 {
-    public class StoppingState : GroundedState
+    public class HardLandingState : LandingState
     {
-        public StoppingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
+        public HardLandingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
-            
         }
 
         public override void Enter()
         {
-            StateMachine.ReusableData.MovementSpeedModifier = 0f;
             base.Enter();
+            
+            MoveAction.Disable();
+            StateMachine.ReusableData.MovementSpeedModifier = 0f;
+            
+            ResetVelocity();
         }
 
-        public override void PhysicsUpdate()
+        public override void Exit()
         {
-            base.PhysicsUpdate();
+            base.Exit();
             
-            RotateTowardsTarget();
-            if (!IsMovingHorizontally()) return;
-            
-            DecelerateHorizontally();
+            MoveAction.Enable();
+        }
+
+        public override void OnAnimationExit()
+        {
+            MoveAction.Enable();
         }
 
         public override void OnAnimationTransition()
@@ -35,15 +41,19 @@ namespace Player.StateMachine.Movement.States.Stopping
         protected override void AddInputCallbacks()
         {
             base.AddInputCallbacks();
-
+            
             MoveAction.started += OnMoveStarted;
         }
-
+        
         protected override void RemoveInputCallbacks()
         {
             base.RemoveInputCallbacks();
             
             MoveAction.started -= OnMoveStarted;
+        }
+
+        protected override void OnJump(InputAction.CallbackContext ctx)
+        {
         }
 
         private void OnMoveStarted(InputAction.CallbackContext ctx)

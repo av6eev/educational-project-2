@@ -1,15 +1,15 @@
-﻿using UnityEngine;
+﻿using Player.StateMachine.Movement.States.Base;
 using Utilities;
 
-namespace Player.StateMachine.Movement.States.Airborne
+namespace Player.StateMachine.Movement.States.Airborne.Base
 {
     public class AirborneState : MovementState
     {
         private readonly bool _isGrounded;
-        public AirborneState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
+        protected AirborneState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
         }
-
+        
         public override void LogicUpdate()
         {
             base.LogicUpdate();

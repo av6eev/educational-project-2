@@ -1,12 +1,12 @@
-﻿using Player.StateMachine.Movement.States.Grounded.Base;
+﻿using Player.StateMachine.Movement.States.Landing.Base;
 using UnityEngine;
 using Utilities;
 
-namespace Player.StateMachine.Movement.States.Grounded
+namespace Player.StateMachine.Movement.States.Landing
 {
-    public class IdlingState : GroundedState
+    public class LightLandingState : LandingState
     {
-        public IdlingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
+        public LightLandingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
         }
 
@@ -16,7 +16,6 @@ namespace Player.StateMachine.Movement.States.Grounded
             
             StateMachine.ReusableData.MovementSpeedModifier = 0f;
             StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.StationaryForce;
-            
             ResetVelocity();
         }
 
@@ -25,14 +24,13 @@ namespace Player.StateMachine.Movement.States.Grounded
             base.LogicUpdate();
             
             if (StateMachine.ReusableData.MovementInput == Vector2.zero) return;
+            
+            OnMove();
         }
 
-        public override void PhysicsUpdate()
+        public override void OnAnimationTransition()
         {
-            base.PhysicsUpdate();
-
-            if (!IsMovingHorizontally()) return;
-            ResetVelocity();
+            StateMachine.ChangeState(StateMachine.IdlingState);
         }
     }
 }

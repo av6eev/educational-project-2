@@ -1,6 +1,7 @@
 ﻿using Player.Data.States;
 using Player.StateMachine.Movement.States.Airborne;
 using Player.StateMachine.Movement.States.Grounded;
+using Player.StateMachine.Movement.States.Landing;
 using Player.StateMachine.Movement.States.Moving;
 using Player.StateMachine.Movement.States.Stopping;
 using Player.StateMachine.Utilities;
@@ -23,6 +24,11 @@ namespace Player.StateMachine.Movement
         public HardStoppingState HardStoppingState { get; }
         
         public JumpingState JumpingState { get; }
+        public FallingState FallingState { get; }
+        
+        public LightLandingState LightLandingState { get; }
+        public HardLandingState HardLandingState { get; }
+        public RollingState RollingState { get; }
 
         public MovementStateMachine(StateMachineEngine stateMachineEngine, GameContext context)
         {
@@ -41,6 +47,11 @@ namespace Player.StateMachine.Movement
             HardStoppingState = new HardStoppingState(this, context);
 
             JumpingState = new JumpingState(this, context);
+            FallingState = new FallingState(this, context);
+            
+            LightLandingState = new LightLandingState(this, context);
+            HardLandingState = new HardLandingState(this, context);
+            RollingState = new RollingState(this, context);
         }
     }
 }
