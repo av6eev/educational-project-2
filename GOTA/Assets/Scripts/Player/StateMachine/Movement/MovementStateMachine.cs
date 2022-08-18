@@ -1,9 +1,9 @@
 ﻿using Player.Data.States;
 using Player.StateMachine.Movement.States.Airborne;
 using Player.StateMachine.Movement.States.Grounded;
-using Player.StateMachine.Movement.States.Landing;
-using Player.StateMachine.Movement.States.Moving;
-using Player.StateMachine.Movement.States.Stopping;
+using Player.StateMachine.Movement.States.Grounded.Landing;
+using Player.StateMachine.Movement.States.Grounded.Moving;
+using Player.StateMachine.Movement.States.Grounded.Stopping;
 using Player.StateMachine.Utilities;
 using Utilities;
 
@@ -11,7 +11,6 @@ namespace Player.StateMachine.Movement
 {
     public class MovementStateMachine : StateMachine
     {
-        public StateMachineEngine StateMachineEngine { get; }
         public StateReusableData ReusableData { get; }
         
         public IdlingState IdlingState { get; }
@@ -33,8 +32,7 @@ namespace Player.StateMachine.Movement
         public MovementStateMachine(StateMachineEngine stateMachineEngine, GameContext context)
         {
             Type = StateMachineType.Movement;
-            StateMachineEngine = stateMachineEngine;
-            
+
             ReusableData = new StateReusableData();
             
             IdlingState = new IdlingState(this, context);

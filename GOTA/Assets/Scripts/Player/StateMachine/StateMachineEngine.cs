@@ -10,7 +10,7 @@ namespace Player.StateMachine
         private readonly GameContext _context;
         private readonly Dictionary<StateMachineType, StateMachine> _stateMachines = new Dictionary<StateMachineType, StateMachine>();
 
-        private MovementStateMachine _movementStateMachine;
+        private readonly MovementStateMachine _movementStateMachine;
 
         public StateMachineEngine(GameContext context)
         {

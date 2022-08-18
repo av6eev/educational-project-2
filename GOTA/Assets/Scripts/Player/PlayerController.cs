@@ -1,5 +1,4 @@
-﻿using Player.StateMachine.Utilities;
-using Utilities;
+﻿using Utilities;
 
 namespace Player
 {

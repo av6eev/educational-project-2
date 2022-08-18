@@ -7,7 +7,7 @@ namespace Player.StateMachine.Movement.States.Airborne
 {
     public class JumpingState : AirborneState
     {
-        private JumpData _jumpData;
+        private readonly JumpData _jumpData;
         private bool _isKeepRotating;
         private bool _canStartFalling;
         
@@ -19,9 +19,10 @@ namespace Player.StateMachine.Movement.States.Airborne
 
         public override void Enter()
         {
+            StateMachine.ReusableData.MovementSpeedModifier = 0f;
+
             base.Enter();
             
-            StateMachine.ReusableData.MovementSpeedModifier = 0f;
             StateMachine.ReusableData.DecelerationForce = _jumpData.DecelerationForce;
             _isKeepRotating = StateMachine.ReusableData.MovementInput != Vector2.zero;
 

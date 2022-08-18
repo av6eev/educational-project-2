@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <GroundedData>k__BackingField:
     <BaseSpeed>k__BackingField: 5
-    <GroundToFallRayDistance>k__BackingField: 1.2
+    <GroundToFallRayDistance>k__BackingField: 1.47
     <SlopeSpeedAngles>k__BackingField:
       serializedVersion: 2
       m_Curve:
@@ -74,9 +74,9 @@ MonoBehaviour:
       <SpeedModifier>k__BackingField: 1
     <DashData>k__BackingField:
       <SpeedModifier>k__BackingField: 2
-      <ConsideredConsecutiveTime>k__BackingField: 1
+      <ConsideredConsecutiveTime>k__BackingField: 1.5
       <DashesLimitAmount>k__BackingField: 2
-      <DashLimitCooldown>k__BackingField: 1.8
+      <DashLimitCooldown>k__BackingField: 5
       <RotationData>k__BackingField:
         <TargetRotationReachTime>k__BackingField: {x: 0, y: 0.02, z: 0}
     <StopData>k__BackingField:

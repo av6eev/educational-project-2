@@ -7,7 +7,7 @@ namespace Player.StateMachine.Movement.States.Airborne
 {
     public class FallingState : AirborneState
     {
-        private FallData _fallData;
+        private readonly FallData _fallData;
         private Vector3 _positionOnEnter;
         
         public FallingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
@@ -17,12 +17,22 @@ namespace Player.StateMachine.Movement.States.Airborne
 
         public override void Enter()
         {
+            StateMachine.ReusableData.MovementSpeedModifier = 0f;
+
             base.Enter();
             
+            SetupAnimation(View.AnimationsData.FallHash, true);
+            
             _positionOnEnter = View.transform.position;
-            StateMachine.ReusableData.MovementSpeedModifier = 0f;
             
             ResetVerticalVelocity();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            SetupAnimation(View.AnimationsData.FallHash, false);
         }
 
         public override void PhysicsUpdate()
@@ -34,7 +44,7 @@ namespace Player.StateMachine.Movement.States.Airborne
 
         protected override void OnGroundContact()
         {
-            var fallDistance = Mathf.Abs(_positionOnEnter.y - View.transform.position.y);
+            var fallDistance = _positionOnEnter.y - View.transform.position.y;
 
             if (fallDistance < _fallData.MinDistanceToHardFall)
             {
@@ -42,7 +52,7 @@ namespace Player.StateMachine.Movement.States.Airborne
                 return;
             }
 
-            if (!StateMachine.ReusableData.IsRunning && StateMachine.ReusableData.MovementInput == Vector2.zero)
+            if (StateMachine.ReusableData.MovementInput == Vector2.zero)
             {
                 StateMachine.ChangeState(StateMachine.HardLandingState);
                 return;

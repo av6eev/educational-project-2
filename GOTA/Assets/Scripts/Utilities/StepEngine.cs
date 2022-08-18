@@ -12,7 +12,6 @@ namespace Utilities
         {
             Add(new InputStep());
             Add(new PlayerStep());
-            // Add(new StatesStep());
         }
         
         public void Execute(GameContext context, ControllerEngine engine, GlobalContainer container)

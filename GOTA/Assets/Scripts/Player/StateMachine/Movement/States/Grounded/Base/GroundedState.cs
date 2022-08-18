@@ -7,18 +7,25 @@ namespace Player.StateMachine.Movement.States.Grounded.Base
 {
     public class GroundedState : MovementState
     {
-        private SlopeData _slopeData;
+        private readonly SlopeData _slopeData;
 
         protected GroundedState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
         {
             _slopeData = View.ColliderUtility.SlopeData;
         }
 
-        public override void LogicUpdate()
+        public override void Enter()
         {
-            base.LogicUpdate();
+            base.Enter();
             
-            OnMove();
+            SetupAnimation(View.AnimationsData.GroundedHash, true);
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            SetupAnimation(View.AnimationsData.GroundedHash, false);
         }
 
         public override void PhysicsUpdate()
@@ -72,35 +79,29 @@ namespace Player.StateMachine.Movement.States.Grounded.Base
             }
         }
         
-        protected virtual void OnFall()
+        private void OnFall()
         {
             StateMachine.ChangeState(StateMachine.FallingState);
         }
         
-        protected virtual void OnMove()
+        protected void OnMove()
         {
-            switch (StateMachine.ReusableData.IsButtonToggled)
+            if (StateMachine.ReusableData.IsButtonToggled)
             {
-                case false:
-                    StateMachine.ChangeState(StateMachine.IdlingState);
-                    //TODO: skill cast system
-                    break;
-                case true when StateMachine.ReusableData.MovementInput != Vector2.zero:
-                    if (StateMachine.ReusableData.IsRunning)
-                    {
-                        StateMachine.ChangeState(StateMachine.RunningState);
-                    }
-                    else
-                    {
-                        StateMachine.ChangeState(StateMachine.WalkingState);
-                    }
-                    break;
-                default:
-                    if (StateMachine.ReusableData.IsGrounded)
-                    {
-                        StateMachine.ChangeState(StateMachine.IdlingState);
-                    }
-                    break;
+                if (StateMachine.ReusableData.MovementInput == Vector2.zero) return;
+                
+                if (StateMachine.ReusableData.IsRunning)
+                {
+                    StateMachine.ChangeState(StateMachine.RunningState);
+                }
+                else
+                {
+                    StateMachine.ChangeState(StateMachine.WalkingState);
+                }
+            }
+            else
+            {
+                //TODO: skill cast system
             }
         }
     }

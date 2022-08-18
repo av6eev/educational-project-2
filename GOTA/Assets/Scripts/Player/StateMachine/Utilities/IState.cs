@@ -1,6 +1,4 @@
-﻿using UnityEngine;
-
-namespace Player.StateMachine.Utilities
+﻿namespace Player.StateMachine.Utilities
 {
     public interface IState
     {

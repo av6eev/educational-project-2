@@ -5,11 +5,22 @@ namespace Player.StateMachine.Movement.States.Airborne.Base
 {
     public class AirborneState : MovementState
     {
-        private readonly bool _isGrounded;
-        protected AirborneState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
+        protected AirborneState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context){}
+
+        public override void Enter()
         {
+            base.Enter();
+            
+            SetupAnimation(View.AnimationsData.AirborneHash, true);
         }
-        
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            SetupAnimation(View.AnimationsData.AirborneHash, false);
+        }
+
         public override void LogicUpdate()
         {
             base.LogicUpdate();

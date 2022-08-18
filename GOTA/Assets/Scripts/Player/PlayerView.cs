@@ -1,23 +1,24 @@
-﻿using Player.Utilities;
+﻿using Player.Data.States;
+using Player.Utilities;
 using Player.Utilities.Data;
 using UnityEngine;
-using Utilities;
 
 namespace Player
 {
     public class PlayerView : MonoBehaviour
     {
+        [field: SerializeField] public AnimationsData AnimationsData { get; private set; }
         public Rigidbody Rigidbody;
         public Transform CameraTransform;
         public Animator Animator;
         public ColliderUtility ColliderUtility;
         public LayerData LayerData;
-
-        private readonly GameContext _context = new GameContext();
         
         private void Awake()
         {
-            CameraTransform = Camera.main.transform;
+            if (Camera.main != null) CameraTransform = Camera.main.transform;
+
+            AnimationsData.Initialize();
         }
         
         private void OnValidate()
@@ -25,6 +26,5 @@ namespace Player
             ColliderUtility.Initialize(gameObject);
             ColliderUtility.CalculateColliderDimensions();
         }
-
     }
 }

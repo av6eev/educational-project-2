@@ -6,18 +6,26 @@ namespace Player.StateMachine.Movement.States.Grounded
 {
     public class IdlingState : GroundedState
     {
-        public IdlingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context)
-        {
-        }
+        public IdlingState(MovementStateMachine stateMachine, GameContext context) : base(stateMachine, context){}
 
         public override void Enter()
         {
+            StateMachine.ReusableData.MovementSpeedModifier = 0f;
+
             base.Enter();
             
-            StateMachine.ReusableData.MovementSpeedModifier = 0f;
+            SetupAnimation(View.AnimationsData.IdleHash, true);
+            
             StateMachine.ReusableData.CurrentJumpForce = AirborneData.JumpData.StationaryForce;
             
             ResetVelocity();
+        }
+
+        public override void Exit()
+        {
+            base.Exit();
+            
+            SetupAnimation(View.AnimationsData.IdleHash, false);
         }
 
         public override void LogicUpdate()
@@ -25,6 +33,8 @@ namespace Player.StateMachine.Movement.States.Grounded
             base.LogicUpdate();
             
             if (StateMachine.ReusableData.MovementInput == Vector2.zero) return;
+            
+            OnMove();
         }
 
         public override void PhysicsUpdate()
@@ -32,6 +42,7 @@ namespace Player.StateMachine.Movement.States.Grounded
             base.PhysicsUpdate();
 
             if (!IsMovingHorizontally()) return;
+            
             ResetVelocity();
         }
     }

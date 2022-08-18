@@ -10,8 +10,8 @@ public class StartController : MonoBehaviour
     [SerializeField] private GlobalContainer _container;
     [SerializeField] private CameraData _cameraData;
     [SerializeField] private PlayerSO _playerSO;
+    
     private readonly GameContext _context = new GameContext();
-
     private readonly ControllerEngine _controllerEngine = new ControllerEngine();
     private readonly SystemEngine _systemEngine = new SystemEngine();
     private readonly StepEngine _stepEngine = new StepEngine();
@@ -41,5 +41,20 @@ public class StartController : MonoBehaviour
     {
         _systemEngine.Update(Time.deltaTime);
         _stateMachineEngine.GetStateMachine(StateMachineType.Movement).PhysicsUpdate();
+    }
+    
+    public void OnAnimationEnterEvent()
+    {
+        _stateMachineEngine.GetStateMachine(StateMachineType.Movement).OnAnimationEnter();
+    }
+    
+    public void OnAnimationExitEvent()
+    {
+        _stateMachineEngine.GetStateMachine(StateMachineType.Movement).OnAnimationExit();
+    }
+    
+    public void OnAnimationTransitionEvent()
+    {
+        _stateMachineEngine.GetStateMachine(StateMachineType.Movement).OnAnimationTransition();
     }
 }

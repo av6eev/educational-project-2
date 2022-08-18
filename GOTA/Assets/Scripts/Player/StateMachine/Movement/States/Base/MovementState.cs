@@ -198,6 +198,11 @@ namespace Player.StateMachine.Movement.States.Base
         }
 
         #region Reusable Methods
+
+        protected void SetupAnimation(int hash, bool state)
+        {
+            View.Animator.SetBool(hash, state);
+        }
         
         protected float GetMovementSpeed(bool isConsiderSlopes = true)
         {

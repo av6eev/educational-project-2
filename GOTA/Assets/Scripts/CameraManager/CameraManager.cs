@@ -10,13 +10,13 @@ namespace CameraManager
         private CinemachineFramingTransposer _framingTransposer;
         private CinemachineInputProvider _inputProvider;
 
-        private float _currentDistanceToTarger;
+        private float _currentDistanceToTarget;
         private void Awake()
         {
             _framingTransposer = GetComponent<CinemachineVirtualCamera>().GetCinemachineComponent<CinemachineFramingTransposer>();
             _inputProvider = GetComponent<CinemachineInputProvider>();
 
-            _currentDistanceToTarger = _data.DefaultDistance;
+            _currentDistanceToTarget = _data.DefaultDistance;
         }
 
         private void Update()
@@ -29,10 +29,10 @@ namespace CameraManager
             var zoomValue = _inputProvider.GetAxisValue(2) * _data.ZoomSensitivity;
             var currentDistance = _framingTransposer.m_CameraDistance;
 
-            _currentDistanceToTarger = Math.Clamp(_currentDistanceToTarger + zoomValue, _data.MinDistance, _data.MaxDistance);
-            if (currentDistance.Equals(_currentDistanceToTarger)) return;
+            _currentDistanceToTarget = Math.Clamp(_currentDistanceToTarget + zoomValue, _data.MinDistance, _data.MaxDistance);
+            if (currentDistance.Equals(_currentDistanceToTarget)) return;
 
-            var lerpedZoomValue = Mathf.Lerp(currentDistance, _currentDistanceToTarger, _data.Smoothing * Time.deltaTime);
+            var lerpedZoomValue = Mathf.Lerp(currentDistance, _currentDistanceToTarget, _data.Smoothing * Time.deltaTime);
             _framingTransposer.m_CameraDistance = lerpedZoomValue;
         }
     }
