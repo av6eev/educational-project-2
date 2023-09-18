@@ -1,0 +1,75 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-6148896445959181389
+MonoBehaviour:
+  m_ObjectHideFlags: 11
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0353a89b1f911e48b9e16bdc9f2e058, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  version: 6
+--- !u!21 &2100000
+Material:
+  serializedVersion: 8
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: WaveMaterial
+  m_Shader: {fileID: -6465566751694194690, guid: 87c69d90c728de44abe0c3582d365570,
+    type: 3}
+  m_Parent: {fileID: 0}
+  m_ModifiedSerializedProperties: 0
+  m_ValidKeywords: []
+  m_InvalidKeywords: []
+  m_LightmapFlags: 1
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_LockedProperties: 
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - unity_Lightmaps:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_LightmapsInd:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - unity_ShadowMasks:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Ints: []
+    m_Floats:
+    - _AlphaClip: 0
+    - _QueueControl: 1
+    - _QueueOffset: 0
+    - _Size: 0.1
+    - _Size1: 0.1
+    - _Size2: 0.05
+    - _Size3: 0.2
+    - _Speed: 0.8
+    - _Speed1: 1
+    - _Speed2: 1.2
+    - _Speed3: 1.25
+    m_Colors:
+    - _Color: {r: 1, g: 1, b: 1, a: 0}
+    - _Color1: {r: 4.293194, g: 4.293194, b: 4.293194, a: 0}
+    - _Color2: {r: 3.9371727, g: 3.9371727, b: 3.9371727, a: 1}
+    - _Color3: {r: 1, g: 1, b: 1, a: 0}
+    - _Color_1: {r: 58.22745, g: 80.31373, b: 191.74902, a: 1}
+    - _SpeedTwirl: {r: -0.3, g: 0.3, b: 0, a: 0}
+    - _SpeedTwirl1: {r: -0.3, g: 0.3, b: 0, a: 0}
+    - _SpeedTwirl2: {r: -0.3, g: 0.3, b: 0, a: 0}
+    - _SpeedTwirl3: {r: -0.3, g: 0.3, b: 0, a: 0}
+  m_BuildTextureStacks: []

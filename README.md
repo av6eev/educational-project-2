@@ -1,2 +1,1 @@
-# educational-project-2
-Educational project for my portfolio
+# GOTA | Glory Of The Arena
