@@ -20,10 +20,7 @@ MonoBehaviour:
       y: 0
       width: 100
       height: 100
-    contents:
-    - model: {fileID: 8926484042661614924}
-      id: 0
-      isStickyNote: 0
+    contents: []
   - title: New Group Node
     position:
       serializedVersion: 2
@@ -31,10 +28,7 @@ MonoBehaviour:
       y: 0
       width: 100
       height: 100
-    contents:
-    - model: {fileID: 8926484042661615131}
-      id: 0
-      isStickyNote: 0
+    contents: []
   stickyNoteInfos: []
   categories: []
   uiBounds:
@@ -158,7 +152,7 @@ MonoBehaviour:
     enumValues: []
     descendantCount: 0
   m_ImportDependencies: []
-  m_GraphVersion: 8
+  m_GraphVersion: 9
   m_ResourceVersion: 1
   m_SubgraphDependencies: []
   m_CategoryPath: 
@@ -835,10 +829,10 @@ MonoBehaviour:
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
-  - {fileID: 8926484042661614654}
   - {fileID: 8926484042661614655}
-  - {fileID: 8926484042661614660}
   - {fileID: 8926484042661614663}
+  - {fileID: 8926484042661614654}
+  - {fileID: 8926484042661614660}
   - {fileID: 8926484042661614665}
   - {fileID: 8926484042661614670}
   - {fileID: 8926484042661614671}
@@ -868,12 +862,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 5
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 4333940904281232215, guid: 1dc55ace427c42446864b3f937ec5356,
     type: 3}
   materialSettings:
@@ -3093,10 +3090,10 @@ MonoBehaviour:
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
-  - {fileID: 8926484042661614718}
   - {fileID: 8926484042661614719}
-  - {fileID: 8926484042661614724}
   - {fileID: 8926484042661614727}
+  - {fileID: 8926484042661614718}
+  - {fileID: 8926484042661614724}
   - {fileID: 8926484042661614728}
   - {fileID: 8926484042661614729}
   - {fileID: 8926484042661614730}
@@ -3126,12 +3123,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 1
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 4333940904281232215, guid: 1dc55ace427c42446864b3f937ec5356,
     type: 3}
   materialSettings:
@@ -4574,10 +4574,10 @@ MonoBehaviour:
   m_UICollapsed: 0
   m_UISuperCollapsed: 0
   m_InputSlots:
-  - {fileID: 8926484042661614822}
   - {fileID: 8926484042661614823}
-  - {fileID: 8926484042661614828}
   - {fileID: 8926484042661614831}
+  - {fileID: 8926484042661614822}
+  - {fileID: 8926484042661614828}
   - {fileID: 8926484042661614832}
   - {fileID: 8926484042661614833}
   - {fileID: 8926484042661614834}
@@ -4607,12 +4607,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 0
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 4333940904281232215, guid: 1dc55ace427c42446864b3f937ec5356,
     type: 3}
   materialSettings:
@@ -7073,12 +7076,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 4
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 0}
   materialSettings:
     m_PropertyNames: []
@@ -10078,12 +10084,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 2
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 0}
   materialSettings:
     m_PropertyNames: []
@@ -10932,12 +10941,15 @@ MonoBehaviour:
   useSoftParticle: 0
   vfxSystemSortPriority: 3
   sort: 0
+  sortMode: 0
+  revertSorting: 0
   indirectDraw: 0
   computeCulling: 0
   frustumCulling: 0
   castShadows: 0
   useExposureWeight: 0
   flipbookLayout: 0
+  needsOwnSort: 0
   shaderGraph: {fileID: 0}
   materialSettings:
     m_PropertyNames: []
