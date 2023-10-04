@@ -1,16 +1,18 @@
 
 GOTA/Library/
 
-GOTA/Logs/
-
 GOTA/UserSettings/
-
-*.sln
 
 *.csproj
 
+*.user
+
+*.sln
+
+GOTA/Logs/
+
+GOTA/obj/
+
 GOTA/.idea/
 
-GOTA/ProjectSettings/RiderScriptEditorPersistedState.asset
-
-GOTA/Temp/
+GOTA/ProjectSettings/
